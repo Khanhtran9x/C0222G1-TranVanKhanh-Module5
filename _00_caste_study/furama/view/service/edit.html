@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Furama</title>
+    <link rel="stylesheet" href="../resource/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../resource/bootstrap/css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Arimo&family=Playfair+Display&display=swap" rel="stylesheet">
+    <script src="../resource/jquery/jquery-3.6.0.min.js"></script>
+    <script src="https://kit.fontawesome.com/b29d237812.js" crossorigin="anonymous"></script>
+    <script>
+        window.onscroll = function () {
+            scrollFunction()
+        };
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                document.getElementById("myBtn").style.display = "block";
+            } else {
+                document.getElementById("myBtn").style.display = "none";
+            }
+        }
+
+        $(document).ready(function () {
+            $('#myBtn').on('click', function (e) {
+                $('html, body').animate({scrollTop: 0}, '300');
+            });
+        })
+    </script>
+</head>
+<body>
+<button id="myBtn" title="Go to top"><i class="fa-solid fa-arrow-up"></i></button>
+
+<div class="header container-fluid justify-content-center row m-0"
+     style="margin-bottom: 1rem;position: sticky;top: 0;z-index: 99">
+    <div class="row">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item m-2">
+                        <a class="nav-link disabled text-white" href="#">Home</a>
+                    </li>
+                    <li class="nav-item dropdown m-2">
+                        <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown1" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Customer
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Add new customer</a>
+                            <a class="dropdown-item" href="#">Display customer</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown m-2">
+                        <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown2" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Employee
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Add new employee</a>
+                            <a class="dropdown-item" href="#">Display employee</a>
+                        </div>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link h3 text-white text-title" href="#">Furama <span
+                                class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item dropdown m-2">
+                        <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown3" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Services
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Add new service</a>
+                            <a class="dropdown-item" href="#">Display service</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown m-2">
+                        <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown4" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Contracts
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Add new contract</a>
+                            <a class="dropdown-item" href="#">Display contract</a>
+                        </div>
+                    </li>
+                    <li class="nav-item m-2">
+                        <a class="nav-link disabled text-white" href="#">Sign in</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row justify-content-center service-banner" style="margin-top: 1rem">
+        <h3 class="text-title text-white m-5" style="font-size: 3rem">Edit Facility</h3>
+    </div>
+    <div class="row justify-content-center" style="margin-top: 2rem; flex-wrap: wrap">
+        <form method="POST" class="needs-validation p-4"
+              style="background-color: whitesmoke; border-radius: 1rem; width: 80%" novalidate>
+            <div class="form-row">
+                <div class="col-md-4 mb-3">
+                    <label for="validationCustom01">Service code</label>
+                    <input type="text" class="form-control" id="validationCustom01"
+                           placeholder="SV-1234" value="" required>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="validationCustom02">Service name</label>
+                    <input type="text" class="form-control" id="validationCustom02"
+                           placeholder="Villa" value="" required>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="validationCustom02">Service area</label>
+                    <input type="text" class="form-control" id="validationCustom03"
+                           placeholder="40m2" value="" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-4 mb-3">
+                    <label for="validationCustom01">Service cost</label>
+                    <input type="text" class="form-control" id="validationCustom04"
+                           placeholder="30" value="" required>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="validationCustom02">Service max people</label>
+                    <input type="text" class="form-control" id="validationCustom05"
+                           placeholder="3" value="" required>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="validationCustom02">Number of floors</label>
+                    <input type="text" class="form-control" id="validationCustom06"
+                           placeholder="5" value="" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-4 mb-3">
+                    <label for="validationCustom01">Service type</label>
+                    <input type="text" class="form-control" id="validationCustom07"
+                           placeholder="Standard" value="" required>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="validationCustom02">Service pool area</label>
+                    <input type="text" class="form-control" id="validationCustom08"
+                           placeholder="30" value="" required>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="validationCustom02">Other convenience</label>
+                    <input type="text" class="form-control" id="validationCustom09"
+                           placeholder="Free breakfast" value="" required>
+                </div>
+            </div>
+            <button class="btn btn-success text-white" type="submit">Update</button>
+        </form>
+    </div>
+</div>
+
+<div class="container-fluid footer" style="bottom: 0; margin-top: 3rem">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-4" style="background-color: #f3f3f3; padding: 2rem 2rem;">
+                <h3 class="font-weight-bold" style="color: #d2c173">How to Get to Us</h3>
+                <p class="font-weight-normal">Furama is a premier base for exploring one of Asia’s most exciting new
+                    destinations.
+                    Just a short drive from Danang lay four UNESCO-listed World Heritage Sites:</p>
+                <p class="font-weight-bold" style="color: #d2c173">Local Places</p>
+                <p class="font-weight-normal">1. The former imperial city of HUE</p>
+                <p class="font-weight-normal">2. The ancient Hoi An</p>
+                <p class="font-weight-normal">3. Champa civilization, My Son</p>
+                <p class="font-weight-normal">4. Phong Nha Caves</p>
+            </div>
+            <div class="col-lg-4 col-md-4 body-justify-center" style="margin-top: 2rem">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4"></div>
+                    <div class="col-lg-4 col-md-4">
+                        <p class="text-white">News</p>
+                        <p class="text-white">Rack Rate</p>
+                        <p class="text-white">Lifestyle Blog</p>
+                        <p class="text-white">Work with us</p>
+                        <p class="text-white">Contact us</p>
+                        <p class="text-white">Follow us</p>
+                        <p class="text-white">Love us</p>
+                    </div>
+                    <div class="col-lg-4 col-md-4"></div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4">
+                <h3 class="font-weight-bold" style="color: #d2c173; padding-top: 2rem">Contact us</h3>
+                <p class="font-weight-normal text-white">103 - 105 Vo Nguyen Giap Street, Khue My Ward, Ngu Hanh Son
+                    District, Danang City, Vietnam
+                    Tel.: 84-236-3847 333/888 * Fax: 84-236-3847 666
+                    Email: reservation@furamavietnam.com * www.furamavietnam.com GDS Codes: Amadeus-GD DADFUR,
+                    Galileo/Apollo-GD 16236, Sabre-GD 032771, Worldspan- GD DADFU</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Notification</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure to delete this facility?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-success">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../resource/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
