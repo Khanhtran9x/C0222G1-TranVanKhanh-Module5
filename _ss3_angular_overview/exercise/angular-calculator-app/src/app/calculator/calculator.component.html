@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Calculator App</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
+  <h3>Calculator</h3>
+  <input type="text" placeholder="First operand" [(ngModel)]="firstOperand">
+  <input type="text" placeholder="Second operand" [(ngModel)]="secondOperand"><br><br>
+  <button (click)="doAddition();">Addition</button>
+  <button (click)="doSubtraction();">Subtraction</button>
+  <button (click)="doMultiplication();">Multiplication</button>
+  <button (click)="doDivision();">Division</button>
+  <br>
+  <p>Result: {{result}}</p>
+</body>
+</html>

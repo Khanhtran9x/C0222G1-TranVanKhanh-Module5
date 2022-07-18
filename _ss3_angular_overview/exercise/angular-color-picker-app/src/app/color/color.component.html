@@ -1,0 +1,10 @@
+<select [(ngModel)]="color">
+  <option>red</option>
+  <option>blue</option>
+  <option>yellow</option>
+  <option>black</option>
+  <option>green</option>
+</select>
+<div style="height: 200px; width: 500px"
+     [style.background-color]="color">
+</div>
