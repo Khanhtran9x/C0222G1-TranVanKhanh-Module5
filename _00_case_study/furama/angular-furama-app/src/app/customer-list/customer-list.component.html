@@ -1,0 +1,136 @@
+<div class="container">
+  <div class="row justify-content-center service-banner" style="margin-top: 1rem">
+    <h3 class="text-title text-white m-5" style="font-size: 3rem">Customer</h3>
+  </div>
+  <div class="row justify-content-center" style="margin-top: 2rem; flex-wrap: wrap">
+    <table class="table table-hover" id="customerTable">
+      <thead class="text-white table-success">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Code</th>
+        <th scope="col">Name</th>
+        <th scope="col">Type</th>
+        <th scope="col">Birthday</th>
+        <th scope="col">Gender</th>
+        <th scope="col">ID Card</th>
+        <th scope="col">Phone</th>
+        <th scope="col">Email</th>
+        <th scope="col">Address</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>1</td>
+        <td>KH-1234</td>
+        <td>Khanh Tran</td>
+        <td>Platinum</td>
+        <td>2022-07-15</td>
+        <td>Male</td>
+        <td>194563697</td>
+        <td>0963698785</td>
+        <td>khanh@gmail.com</td>
+        <td>Quang Binh</td>
+        <td><button class="btn btn-success btn-sm">Edit</button></td>
+        <td><button class="btn btn-success btn-sm" data-toggle="modal" data-target="#deleteModal">Delete</button></td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>KH-1234</td>
+        <td>Khanh Tran</td>
+        <td>Platinum</td>
+        <td>2022-07-15</td>
+        <td>Male</td>
+        <td>194563697</td>
+        <td>0963698785</td>
+        <td>khanh@gmail.com</td>
+        <td>Quang Binh</td>
+        <td><button class="btn btn-success btn-sm">Edit</button></td>
+        <td><button class="btn btn-success btn-sm" data-toggle="modal" data-target="#deleteModal">Delete</button></td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>KH-1234</td>
+        <td>Khanh Tran</td>
+        <td>Platinum</td>
+        <td>2022-07-15</td>
+        <td>Male</td>
+        <td>194563697</td>
+        <td>0963698785</td>
+        <td>khanh@gmail.com</td>
+        <td>Quang Binh</td>
+        <td><button class="btn btn-success btn-sm">Edit</button></td>
+        <td><button class="btn btn-success btn-sm" data-toggle="modal" data-target="#deleteModal">Delete</button></td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>KH-1234</td>
+        <td>Khanh Tran</td>
+        <td>Platinum</td>
+        <td>2022-07-15</td>
+        <td>Male</td>
+        <td>194563697</td>
+        <td>0963698785</td>
+        <td>khanh@gmail.com</td>
+        <td>Quang Binh</td>
+        <td><button class="btn btn-success btn-sm">Edit</button></td>
+        <td><button class="btn btn-success btn-sm" data-toggle="modal" data-target="#deleteModal">Delete</button></td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td>KH-1234</td>
+        <td>Khanh Tran</td>
+        <td>Platinum</td>
+        <td>2022-07-15</td>
+        <td>Male</td>
+        <td>194563697</td>
+        <td>0963698785</td>
+        <td>khanh@gmail.com</td>
+        <td>Quang Binh</td>
+        <td><button class="btn btn-success btn-sm">Edit</button></td>
+        <td><button class="btn btn-success btn-sm" data-toggle="modal" data-target="#deleteModal">Delete</button></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="row justify-content-center">
+    <nav aria-label="...">
+      <ul class="pagination">
+        <li class="page-item disabled">
+          <a class="page-link" href="#" tabindex="-1">Previous</a>
+        </li>
+        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+        <li class="page-item">
+          <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item">
+          <a class="page-link" href="#">Next</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Notification</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure to delete this customer?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-success" data-dismiss="modal">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
