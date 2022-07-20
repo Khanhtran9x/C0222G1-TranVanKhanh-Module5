@@ -1,0 +1,60 @@
+<div class="container">
+  <h3>Register form!</h3>
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input name="email" type="text" id="email" formControlName="email" class="form-control">
+      <p style="color: red" *ngIf="f.email.touched
+          && f.email.errors.required">Email is required</p>
+<!--      <p style="color: red" *ngIf="f.email.touched-->
+<!--          && f.email.errors.email">Email is invalid</p>-->
+
+      <label for="password">Password</label>
+      <input name="password" type="password" id="password" formControlName="password" class="form-control">
+      <p style="color: red" *ngIf="f.password.touched
+          && f.password.errors.required">Password is required</p>
+      <p style="color: red" *ngIf="f.password.touched
+          && f.password.errors.minlength">Password length must be than 6</p>
+
+      <label for="confirm-password">Confirm Password</label>
+      <input name="confirm-password" type="password" id="confirm-password" formControlName="confirmPassword" class="form-control">
+      <p style="color: red" *ngIf="f.confirmPassword.touched
+          && f.confirmPassword.errors.required">Password is required</p>
+
+      <label for="country">Country</label>
+      <select name="country" id="country" formControlName="country" class="form-control">
+        <option value="US">United States</option>
+        <option value="UK">United Kingdom</option>
+        <option value="Viet Nam">Viet Nam</option>
+        <option value="China">China</option>
+        <option value="Japan">Japan</option>
+      </select>
+      <p style="color: red" *ngIf="f.country.touched
+          && f.country.errors.required">Country is required</p>
+
+      <label for="age">Age</label>
+      <input name="age" type="number" id="age" formControlName="age" class="form-control">
+      <p style="color: red" *ngIf="f.age.touched
+          && f.age.errors.required">Age is required</p>
+      <p style="color: red" *ngIf="f.age.touched
+          && f.age.errors.min">Age must be above 18</p>
+
+      <label for="gender">Gender</label><br>
+      <input type = "radio" name="gender" id="gender" value="true">Male
+      <input type = "radio" name="gender" id="gender2" value="false">Female
+      <p style="color: red" *ngIf="f.country.touched && f.country.invalid">Gender is
+        required</p>
+      <br>
+
+      <label for="phone">Phone</label>
+      <input name="phone" type="text" id="phone" formControlName="phone" class="form-control">
+      <p style="color: red" *ngIf="f.phone.touched
+          && f.phone.errors.required">Phone number is required</p>
+      <p style="color: red" *ngIf="f.phone.touched
+          && f.phone.errors.pattern">Phone number is invalid</p>
+      <br>
+      <button type='submit' [disabled]="registerForm.invalid" class="btn btn-primary">Submit</button>
+    </div>
+  </form>
+</div>
+

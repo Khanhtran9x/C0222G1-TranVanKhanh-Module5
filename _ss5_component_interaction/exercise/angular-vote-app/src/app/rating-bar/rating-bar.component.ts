@@ -30,20 +30,6 @@ export class RatingBarComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if ('max' in changes) {
-      let max = changes.max.currentValue;
-      max = typeof max === 'undefined' ? 5 : max;
-      this.max = max;
-      this.calculate(max, this.ratingValue);
-    }
-  }
-
-  calculate(max, ratingValue) {
-    this.ratingUnits = Array.from({length: max},
-      (_, index) => ({
-        value: index + 1,
-        active: index < ratingValue
-      }));
   }
 
   select(index) {

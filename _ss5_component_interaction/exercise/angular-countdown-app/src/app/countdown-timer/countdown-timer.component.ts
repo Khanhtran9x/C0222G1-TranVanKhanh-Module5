@@ -17,7 +17,7 @@ export class CountdownTimerComponent implements OnInit, OnDestroy, OnChanges {
       let v = changes.seconds.currentValue;
       v = typeof v === 'undefined' ? 10 : v;
       const vFixed = Number(v);
-      this.seconds = Number.isNaN(vFixed) ? 11 : vFixed;
+      this.seconds = Number.isNaN(vFixed) ? 10 : vFixed;
     }
   }
   ngOnInit(): void {
@@ -37,9 +37,9 @@ export class CountdownTimerComponent implements OnInit, OnDestroy, OnChanges {
   }
   stop() {
     this.clearTimer();
-    this.message = `Holding at T-${this.remainingTime} seconds`;
+    this.message = `Pausing at ${this.remainingTime} seconds`;
   }
-  private countDown() {
+   countDown() {
     this.intervalId = setInterval(() => {
       this.remainingTime -= 1;
       if (this.remainingTime === 0) {
@@ -47,12 +47,12 @@ export class CountdownTimerComponent implements OnInit, OnDestroy, OnChanges {
         this.clearTimer();
         this.finish.emit(true);
       } else {
-        this.message = `T-${this.remainingTime} seconds and counting`;
+        this.message = `${this.remainingTime} seconds and counting`;
       }
     }, 1000);
   }
 
-  private reset() {
+   reset() {
     this.clearTimer();
     this.remainingTime = this.seconds;
     this.message = `Click start button to start the Countdown`;
