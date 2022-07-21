@@ -1,0 +1,15 @@
+export interface Service {
+  serviceId?: number,
+  serviceCode?: string,
+  serviceName?: string,
+  serviceArea?: string,
+  serviceCost?: string,
+  serviceMaxPeople?: string,
+  serviceStandardRoom?: string,
+  descriptionOtherConvenience?: string,
+  servicePoolArea?: string,
+  serviceNumberOfFloors?: string,
+  rentType?: string,
+  serviceType?: string,
+  imgUrl?: string,
+}

@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="row justify-content-center" style="margin-top: 10rem">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" style="background-color: whitesmoke; padding: 1rem; border-radius: 1rem">
+      <div class="form-group">
+        <label for="email">Email address</label>
+        <input type="email" class="form-control" id="email" formControlName="email" placeholder="Enter email">
+        <p style="color: red" *ngIf="loginForm.get('email').touched && loginForm.hasError('required', 'email')">Email is required</p>
+        <p style="color: red" *ngIf="loginForm.get('email').touched
+                && loginForm.hasError('email', 'email')">Email is invalid</p>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="password" formControlName="password" placeholder="Password">
+        <p style="color: red" *ngIf="loginForm.get('password').touched
+                && loginForm.hasError('required', 'password')">Password is required</p>
+        <p style="color: red" *ngIf="loginForm.get('password').touched
+                && loginForm.hasError('minlength', 'password')">Password length must be longer than 6 characters</p>
+      </div>
+      <button type="submit" [disabled]="loginForm.invalid" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</div>
