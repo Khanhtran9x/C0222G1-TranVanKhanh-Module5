@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import {Service} from "../../interface/Service";
-import {ServiceService} from "../../service/service.service";
+import {Component, OnInit} from '@angular/core';
+import {Service} from '../../interface/Service';
+import {ServiceService} from '../../service/service.service';
 
 @Component({
   selector: 'app-service-list',
@@ -8,26 +8,32 @@ import {ServiceService} from "../../service/service.service";
   styleUrls: ['./service-list.component.css']
 })
 export class ServiceListComponent implements OnInit {
+  page = 0;
+  totalItems: any;
+  itemsPerPage = 6;
   services: Service[] = [];
-  curPage: number;
-  pageSize: number;
 
-  constructor(private service: ServiceService) { }
+  constructor(private service: ServiceService) {
+  }
 
   ngOnInit(): void {
     this.getAllServices();
-    this.curPage = 1;
-    this.pageSize = 10;
   }
 
   getAllServices() {
-    this.service.getAllServices().subscribe(services => {
-      console.log(services)
-      this.services = services;
-    })
+    this.service.getAllServices(this.page).subscribe((services: any) => {
+      console.log(services);
+      this.services = services.content;
+      this.totalItems = services.totalElements;
+    });
   }
 
-  numberOfPages() {
-    return Math.ceil(this.services.length / this.pageSize);
-  };
+  getPage(page) {
+    page = page - 1;
+    this.service.getAllServices(page).subscribe((services: any) => {
+      console.log(services);
+      this.services = services.content;
+      this.totalItems = services.totalElements;
+    });
+  }
 }

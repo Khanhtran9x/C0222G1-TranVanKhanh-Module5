@@ -1,12 +1,13 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {environment} from "../enviroment";
-import {ServiceType} from "../interface/service-type";
-import {RentType} from "../interface/rent-type";
-import {Service} from "../interface/Service";
+import {environment} from '../enviroment';
+import {ServiceType} from '../interface/service-type';
+import {RentType} from '../interface/rent-type';
+import {Service} from '../interface/Service';
 
 const API_URL = `${environment.apiUrl}`;
+
 @Injectable({
   providedIn: 'root'
 })
@@ -15,8 +16,9 @@ export class ServiceService {
   constructor(private http: HttpClient) {
   }
 
-  getAllServices(): Observable<Service[]> {
-    return this.http.get<Service[]>(API_URL + '/api/services/list');
+  getAllServices(page: number): Observable<Service[]> {
+    console.log(page);
+    return this.http.get<Service[]>(API_URL + `/api/services?page=${page}`);
   }
 
   getAllServiceTypes(): Observable<ServiceType[]> {

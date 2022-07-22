@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {Service} from "../../interface/Service";
-import {ServiceType} from "../../interface/service-type";
-import {RentType} from "../../interface/rent-type";
-import {FormControl, FormGroup} from "@angular/forms";
-import {ServiceService} from "../../service/service.service";
+import {Service} from '../../interface/Service';
+import {ServiceType} from '../../interface/service-type';
+import {RentType} from '../../interface/rent-type';
+import {FormControl, FormGroup} from '@angular/forms';
+import {ServiceService} from '../../service/service.service';
 
 @Component({
   selector: 'app-service-create',
@@ -43,23 +43,23 @@ export class ServiceCreateComponent implements OnInit {
   getAllServiceTypes() {
     this.service.getAllServiceTypes().subscribe(serviceTypes => {
       this.serviceTypes = serviceTypes;
-    })
+    });
   }
 
   getAllRentTypes() {
     this.service.getAllRentTypes().subscribe(rentTypes => {
       this.rentTypes = rentTypes;
-    })
+    });
   }
 
   getAllServices() {
-    this.service.getAllServices().subscribe(services => {
-      console.log(services)
+    this.service.getAllServices(1).subscribe(services => {
+      console.log(services);
       this.services = services;
-    })
+    });
   }
 
-  createNewFacility(){
+  createNewFacility() {
     console.log(this.serviceForm.value);
   }
 }

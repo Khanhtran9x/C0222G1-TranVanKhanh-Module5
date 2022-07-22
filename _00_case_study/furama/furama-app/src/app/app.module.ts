@@ -3,10 +3,10 @@ import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {Routes, RouterModule} from '@angular/router';
 import {HttpClientModule} from '@angular/common/http';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 import {AppComponent} from './app.component';
 import {HeaderComponent} from './component/header/header.component';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {FooterComponent} from './component/footer/footer.component';
 import {ServiceListComponent} from './component/service-list/service-list.component';
 import {ServiceEditComponent} from './component/service-edit/service-edit.component';
@@ -48,11 +48,11 @@ const routesConfig: Routes = [
   ],
   imports: [
     BrowserModule,
-    NgbModule,
     FormsModule,
     RouterModule.forRoot(routesConfig),
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]
