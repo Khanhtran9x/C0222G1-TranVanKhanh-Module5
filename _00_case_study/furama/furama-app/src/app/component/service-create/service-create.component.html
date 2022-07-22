@@ -1,0 +1,81 @@
+<div class="container">
+  <div class="row justify-content-center service-banner" style="margin-top: 1rem">
+    <h3 class="text-title text-white m-5" style="font-size: 3rem">Add New Service</h3>
+  </div>
+  <div class="row justify-content-center" style="margin-top: 2rem; flex-wrap: wrap">
+    <form [formGroup]="serviceForm" (ngSubmit)="createNewFacility()" class="needs-validation p-4"
+          style="background-color: whitesmoke; border-radius: 1rem; width: 80%" novalidate>
+      <div class="form-row">
+        <div class="col-md-4 mb-3">
+          <label for="validationCustom01">Service code</label>
+          <input type="text" class="form-control" formControlName="serviceCode" id="validationCustom01"
+                 placeholder="SV-1234" value="" required>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="validationCustom02">Service name</label>
+          <input type="text" class="form-control" formControlName="serviceName" id="validationCustom02"
+                 placeholder="Villa" value="" required>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="validationCustom02">Service area</label>
+          <input type="text" class="form-control" formControlName="serviceArea" id="validationCustom03"
+                 placeholder="40" value="" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-4 mb-3">
+          <label for="validationCustom01">Service cost</label>
+          <input type="text" class="form-control" formControlName="serviceCost" id="validationCustom04"
+                 placeholder="30" value="" required>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="validationCustom02">Service max people</label>
+          <input type="text" class="form-control" formControlName="serviceMaxPeople" id="validationCustom05"
+                 placeholder="3" value="" required>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="validationCustom02">Number of floors</label>
+          <input type="text" class="form-control" formControlName="serviceNumberOfFloors" id="validationCustom06"
+                 placeholder="5" value="" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-4 mb-3">
+          <label for="serviceType">Service type</label>
+          <select class="form-control" formControlName="serviceType" id="serviceType">
+            <option *ngFor="let serviceType of serviceTypes" [value]="serviceType.serviceTypeId">{{serviceType.serviceTypeName}}</option>
+          </select>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="rentType">Rent type</label>
+          <select class="form-control" formControlName="rentType" id="rentType">
+            <option *ngFor="let rentType of rentTypes" [value]="rentType.rentTypeId">{{rentType.rentTypeName}}</option>
+          </select>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="poolArea">Service pool area</label>
+          <input type="text" class="form-control" formControlName="servicePoolArea" id="poolArea"
+                 placeholder="30" value="" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-4 mb-3">
+          <label for="roomStandard">Room standard</label>
+          <input type="text" class="form-control" formControlName="serviceStandardRoom" id="roomStandard"
+                 placeholder="Normal" value="" required>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="otherConvenience">Other convenience</label>
+          <input type="text" class="form-control" formControlName="descriptionOtherConvenience" id="otherConvenience"
+                 placeholder="Free breakfast" value="" required>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="bannerUrl">Banner Image Url</label>
+          <input type="text" class="form-control" formControlName="imgUrl" id="bannerUrl" value="" required>
+        </div>
+      </div>
+
+      <button class="btn btn-success text-white" type="submit">Create</button>
+    </form>
+  </div>
+</div>
