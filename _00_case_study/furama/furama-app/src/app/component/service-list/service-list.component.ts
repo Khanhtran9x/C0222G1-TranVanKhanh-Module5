@@ -11,6 +11,8 @@ export class ServiceListComponent implements OnInit {
   page = 0;
   totalItems: any;
   itemsPerPage = 6;
+  serviceId: number;
+  serviceName: string;
   services: Service[] = [];
 
   constructor(private service: ServiceService) {
@@ -35,5 +37,22 @@ export class ServiceListComponent implements OnInit {
       this.services = services.content;
       this.totalItems = services.totalElements;
     });
+  }
+
+  getServiceInfo(serviceId: number, serviceName: string) {
+    this.serviceId = serviceId;
+    this.serviceName = serviceName;
+  }
+
+  deleteService() {
+    this.service.deleteService(this.serviceId)
+      .subscribe(
+        response => {
+          console.log(response);
+          this.getAllServices();
+        },
+        error => {
+          console.log(error);
+        });
   }
 }

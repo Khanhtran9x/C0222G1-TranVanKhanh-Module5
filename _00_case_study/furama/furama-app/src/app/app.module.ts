@@ -1,5 +1,5 @@
-import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {Routes, RouterModule} from '@angular/router';
 import {HttpClientModule} from '@angular/common/http';
@@ -25,10 +25,11 @@ const routesConfig: Routes = [
   {path: 'customers/create', component: CustomerCreateComponent},
   {path: 'services', component: ServiceListComponent},
   {path: 'services/create', component: ServiceCreateComponent},
+  {path: 'services/edit/:id', component: ServiceEditComponent},
   {path: 'contracts', component: ContractListComponent},
   {path: 'contracts/create', component: ContractCreateComponent},
   {path: '**', component: PageNotFoundComponent},
-]
+];
 
 @NgModule({
   declarations: [
@@ -52,7 +53,7 @@ const routesConfig: Routes = [
     RouterModule.forRoot(routesConfig),
     ReactiveFormsModule,
     HttpClientModule,
-    NgxPaginationModule
+    NgxPaginationModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

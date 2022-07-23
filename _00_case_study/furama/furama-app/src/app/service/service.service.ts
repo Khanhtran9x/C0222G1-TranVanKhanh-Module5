@@ -28,4 +28,21 @@ export class ServiceService {
   getAllRentTypes(): Observable<RentType[]> {
     return this.http.get<RentType[]>(API_URL + '/api/rent-types');
   }
+
+  saveService(service): Observable<Service> {
+    return this.http.post<Service>(API_URL + '/api/services', service);
+  }
+
+  updateService(service): Observable<Service> {
+    return this.http.put<Service>(API_URL + `/api/services/${service.serviceId}`, service);
+  }
+
+  findById(id: number): Observable<Service> {
+    return this.http.get<Service>(API_URL + `/api/services/${id}`);
+  }
+
+  deleteService(serviceId): Observable<Service> {
+    return this.http.delete<Service>(API_URL + `/api/services/${serviceId}`);
+  }
+
 }

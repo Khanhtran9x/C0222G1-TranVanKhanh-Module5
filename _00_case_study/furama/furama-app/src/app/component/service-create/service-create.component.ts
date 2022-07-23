@@ -35,7 +35,7 @@ export class ServiceCreateComponent implements OnInit {
       serviceStandardRoom: new FormControl(),
       serviceType: new FormControl(),
       rentType: new FormControl(),
-      otherConvenience: new FormControl(),
+      descriptionOtherConvenience: new FormControl(),
       imgUrl: new FormControl()
     });
   }
@@ -59,7 +59,22 @@ export class ServiceCreateComponent implements OnInit {
     });
   }
 
-  createNewFacility() {
-    console.log(this.serviceForm.value);
+  addNewService() {
+    const serviceObj = this.serviceForm.value;
+    serviceObj.serviceType = {
+      serviceTypeId: Number(this.serviceForm.value.serviceType)
+    };
+    serviceObj.rentType = {
+      rentTypeId: Number(this.serviceForm.value.rentType)
+    };
+    this.service.saveService(serviceObj)
+      .subscribe(
+        response => {
+          console.log(response);
+        },
+        error => {
+          console.log(error);
+        });
+    this.serviceForm.reset();
   }
 }
