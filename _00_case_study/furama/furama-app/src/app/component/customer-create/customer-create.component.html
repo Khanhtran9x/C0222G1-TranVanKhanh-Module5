@@ -3,59 +3,94 @@
     <h3 class="text-title text-white m-5" style="font-size: 3rem">Add New Customer</h3>
   </div>
   <div class="row justify-content-center" style="margin-top: 2rem; flex-wrap: wrap">
-    <form method="POST" class="needs-validation p-4"
+    <form [formGroup]="customerForm" (ngSubmit)="addNewCustomer()" class="needs-validation p-4"
           style="background-color: whitesmoke; border-radius: 1rem; width: 80%" novalidate>
       <div class="form-row">
         <div class="col-md-4 mb-3">
           <label for="validationCustom01">Customer code</label>
-          <input type="text" class="form-control" id="validationCustom01"
+          <input type="text" class="form-control" formControlName="customerCode" id="validationCustom01"
                  placeholder="KH-1234" value="" required>
+          <p style="color: red; font-size: 0.9rem" *ngIf="customerForm.get('customerCode').touched
+                && customerForm.hasError('required', 'customerCode')">* Customer code is required</p>
+          <p style="color: red; font-size: 0.9rem" *ngIf="customerForm.get('customerCode').touched
+                && customerForm.hasError('pattern', 'customerCode')">* Customer code is invalid</p>
         </div>
         <div class="col-md-4 mb-3">
           <label for="validationCustom02">Customer name</label>
-          <input type="text" class="form-control" id="validationCustom02"
+          <input type="text" class="form-control" formControlName="customerName" id="validationCustom02"
                  placeholder="Tran Van A" value="" required>
+          <p style="color: red; font-size: 0.9rem" *ngIf="customerForm.get('customerName').touched
+                && customerForm.hasError('required', 'customerName')">* Customer name is required</p>
+          <p style="color: red; font-size: 0.9rem" *ngIf="customerForm.get('customerName').touched
+                && customerForm.hasError('pattern', 'customerName')">* Customer name is invalid</p>
         </div>
-        <div class="col-md-4 mb-3">
+        <div class="col-md-4 mb-3" formGroupName="customerType">
           <label for="validationCustom02">Customer type</label>
-          <input type="text" class="form-control" id="validationCustom03"
-                 placeholder="Platinum" value="" required>
+          <select class="form-control" formControlName="customerTypeId" id="customerType">
+            <option value="" disabled>Select customer type</option>
+            <option *ngFor="let customerType of customerTypes" [value]="customerType.customerTypeId">{{customerType.customerTypeName}}</option>
+          </select>
+          <p style="color: red; font-size: 0.9rem" *ngIf="customerForm.get('customerType').get('customerTypeId').touched
+                && customerForm.get('customerType').hasError('required', 'customerTypeId')">* Customer type is required</p>
         </div>
       </div>
       <div class="form-row">
         <div class="col-md-4 mb-3">
           <label for="validationCustom01">Customer ID card</label>
-          <input type="text" class="form-control" id="validationCustom04"
+          <input type="text" class="form-control" formControlName="customerIdCard" id="validationCustom04"
                  placeholder="1945XXXXX" value="" required>
+          <p style="color: red; font-size: 0.9rem" *ngIf="customerForm.get('customerIdCard').touched
+                && customerForm.hasError('required', 'customerIdCard')">* Customer ID is required</p>
+          <p style="color: red; font-size: 0.9rem" *ngIf="customerForm.get('customerIdCard').touched
+                && customerForm.hasError('pattern', 'customerIdCard')">* Customer ID is invalid</p>
         </div>
         <div class="col-md-4 mb-3">
           <label for="validationCustom02">Date of birth</label>
-          <input type="date" class="form-control" id="validationCustom05" value="" required>
+          <input type="date" class="form-control" formControlName="customerBirthday" id="validationCustom05" value="">
+          <p style="color: red; font-size: 0.9rem" *ngIf="customerForm.get('customerBirthday').touched
+                && customerForm.hasError('required', 'customerBirthday')">* Customer birthday is required</p>
+          <p style="color: red; font-size: 0.9rem" *ngIf="customerForm.get('customerBirthday').touched
+                && customerForm.hasError('pattern', 'customerBirthday')">* Customer birthday is invalid</p>
         </div>
         <div class="col-md-4 mb-3">
           <label for="validationCustom02">Customer phone</label>
-          <input type="text" class="form-control" id="validationCustom06"
+          <input type="text" class="form-control" formControlName="customerPhone" id="validationCustom06"
                  placeholder="090XXXXXXX" value="" required>
+          <p style="color: red; font-size: 0.9rem" *ngIf="customerForm.get('customerPhone').touched
+                && customerForm.hasError('required', 'customerPhone')">* Customer phone is required</p>
+          <p style="color: red; font-size: 0.9rem" *ngIf="customerForm.get('customerPhone').touched
+                && customerForm.hasError('pattern', 'customerPhone')">* Customer phone is invalid</p>
         </div>
       </div>
       <div class="form-row">
         <div class="col-md-4 mb-3">
-          <label for="validationCustom01">Customer gender</label>
-          <input type="text" class="form-control" id="validationCustom07"
-                 placeholder="Male" value="" required>
+          <label for="customerGender">Customer gender</label>
+          <select class="form-control" formControlName="customerGender" id="customerGender">
+            <option value="" disabled>Select customer gender</option>
+            <option value="true">Male</option>
+            <option value="false">Female</option>
+          </select>
+          <p style="color: red; font-size: 0.9rem" *ngIf="customerForm.get('customerGender').touched
+                && customerForm.hasError('required', 'customerGender')">* Customer gender is required</p>
         </div>
         <div class="col-md-4 mb-3">
           <label for="validationCustom02">Customer address</label>
-          <input type="text" class="form-control" id="validationCustom08"
+          <input type="text" class="form-control" formControlName="customerAddress" id="validationCustom08"
                  placeholder="Da Nang" value="" required>
+          <p style="color: red; font-size: 0.9rem" *ngIf="customerForm.get('customerAddress').touched
+                && customerForm.hasError('required', 'customerAddress')">* Customer address is required</p>
         </div>
         <div class="col-md-4 mb-3">
           <label for="validationCustom02">Customer email</label>
-          <input type="text" class="form-control" id="validationCustom09"
+          <input type="text" class="form-control" formControlName="customerEmail" id="validationCustom09"
                  placeholder="abc@gmail.com" value="" required>
+          <p style="color: red; font-size: 0.9rem" *ngIf="customerForm.get('customerEmail').touched
+                && customerForm.hasError('required', 'customerEmail')">* Customer email is required</p>
+          <p style="color: red; font-size: 0.9rem" *ngIf="customerForm.get('customerEmail').touched
+                && customerForm.hasError('pattern', 'customerEmail')">* Customer email is invalid</p>
         </div>
       </div>
-      <button class="btn btn-success text-white" type="submit">Create</button>
+      <button class="btn btn-success text-white" [disabled]="customerForm.invalid" type="submit">Create</button>
     </form>
   </div>
 </div>

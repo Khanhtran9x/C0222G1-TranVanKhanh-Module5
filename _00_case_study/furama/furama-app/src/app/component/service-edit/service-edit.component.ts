@@ -13,12 +13,10 @@ import {RentType} from '../../interface/rent-type';
 })
 export class ServiceEditComponent implements OnInit {
   id: number;
-  serviceObj: Service;
   serviceTypes: ServiceType[];
-  serviceTypeId: number;
   rentTypes: RentType[];
-  rentTypeId: number;
   serviceForm = new FormGroup({
+    serviceId: new FormControl(),
     serviceCode: new FormControl(),
     serviceName: new FormControl(),
     serviceArea: new FormControl(),
@@ -27,8 +25,12 @@ export class ServiceEditComponent implements OnInit {
     serviceMaxPeople: new FormControl(),
     servicePoolArea: new FormControl(),
     serviceStandardRoom: new FormControl(),
-    serviceType: new FormControl(),
-    rentType: new FormControl(),
+    serviceType: new FormGroup({
+      serviceTypeId: new FormControl()
+    }),
+    rentType: new FormGroup({
+      rentTypeId: new FormControl()
+    }),
     descriptionOtherConvenience: new FormControl(),
     imgUrl: new FormControl()
   });
@@ -47,11 +49,7 @@ export class ServiceEditComponent implements OnInit {
 
   getService(id) {
     this.service.findById(id).subscribe(service => {
-      this.serviceTypeId = service.serviceType.serviceTypeId;
-      this.rentTypeId = service.rentType.rentTypeId;
       this.serviceForm.patchValue(service);
-      this.serviceForm.value.serviceType = this.serviceTypeId;
-      this.serviceForm.value.rentType = this.rentTypeId;
     });
   }
 
@@ -68,31 +66,11 @@ export class ServiceEditComponent implements OnInit {
   }
 
   updateService() {
-    this.serviceObj = this.serviceForm.value;
-    if (isNaN(this.serviceForm.value.serviceType)) {
-      this.serviceObj.serviceType = {
-        serviceTypeId: this.serviceTypeId
-      };
-    } else {
-      this.serviceObj.serviceType = {
-        serviceTypeId: Number(this.serviceForm.value.serviceType)
-      };
-    }
-    if (isNaN(this.serviceForm.value.rentType)) {
-      this.serviceObj.rentType = {
-        rentTypeId: Number(this.rentTypeId)
-      };
-    } else {
-      this.serviceObj.rentType = {
-        rentTypeId: Number(this.serviceForm.value.rentType)
-      };
-    }
-    this.serviceObj.serviceId = this.id;
-    console.log(this.serviceObj);
-    this.service.updateService(this.serviceObj)
+    this.service.updateService(this.serviceForm.value)
       .subscribe(
         response => {
           console.log(response);
+          console.log('ok');
         },
         error => {
           console.log(error);

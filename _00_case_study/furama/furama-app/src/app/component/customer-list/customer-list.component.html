@@ -21,96 +21,30 @@
       </tr>
       </thead>
       <tbody>
-      <tr>
-        <td>1</td>
-        <td>KH-1234</td>
-        <td>Khanh Tran</td>
-        <td>Platinum</td>
-        <td>2022-07-15</td>
-        <td>Male</td>
-        <td>194563697</td>
-        <td>0963698785</td>
-        <td>khanh@gmail.com</td>
-        <td>Quang Binh</td>
-        <td><button class="btn btn-success btn-sm">Edit</button></td>
-        <td><button class="btn btn-success btn-sm" data-toggle="modal" data-target="#deleteModal">Delete</button></td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>KH-1234</td>
-        <td>Khanh Tran</td>
-        <td>Platinum</td>
-        <td>2022-07-15</td>
-        <td>Male</td>
-        <td>194563697</td>
-        <td>0963698785</td>
-        <td>khanh@gmail.com</td>
-        <td>Quang Binh</td>
-        <td><button class="btn btn-success btn-sm">Edit</button></td>
-        <td><button class="btn btn-success btn-sm" data-toggle="modal" data-target="#deleteModal">Delete</button></td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td>KH-1234</td>
-        <td>Khanh Tran</td>
-        <td>Platinum</td>
-        <td>2022-07-15</td>
-        <td>Male</td>
-        <td>194563697</td>
-        <td>0963698785</td>
-        <td>khanh@gmail.com</td>
-        <td>Quang Binh</td>
-        <td><button class="btn btn-success btn-sm">Edit</button></td>
-        <td><button class="btn btn-success btn-sm" data-toggle="modal" data-target="#deleteModal">Delete</button></td>
-      </tr>
-      <tr>
-        <td>4</td>
-        <td>KH-1234</td>
-        <td>Khanh Tran</td>
-        <td>Platinum</td>
-        <td>2022-07-15</td>
-        <td>Male</td>
-        <td>194563697</td>
-        <td>0963698785</td>
-        <td>khanh@gmail.com</td>
-        <td>Quang Binh</td>
-        <td><button class="btn btn-success btn-sm">Edit</button></td>
-        <td><button class="btn btn-success btn-sm" data-toggle="modal" data-target="#deleteModal">Delete</button></td>
-      </tr>
-      <tr>
-        <td>5</td>
-        <td>KH-1234</td>
-        <td>Khanh Tran</td>
-        <td>Platinum</td>
-        <td>2022-07-15</td>
-        <td>Male</td>
-        <td>194563697</td>
-        <td>0963698785</td>
-        <td>khanh@gmail.com</td>
-        <td>Quang Binh</td>
-        <td><button class="btn btn-success btn-sm">Edit</button></td>
-        <td><button class="btn btn-success btn-sm" data-toggle="modal" data-target="#deleteModal">Delete</button></td>
+      <tr *ngFor="let customer of customers | paginate :
+          {itemsPerPage: itemsPerPage, currentPage: page, totalItems: totalItems }
+          ; index as i">
+        <td>{{i + 1}}</td>
+        <td>{{customer.customerCode}}</td>
+        <td>{{customer.customerName}}</td>
+        <td>{{customer.customerType.customerTypeName}}</td>
+        <td>{{customer.customerBirthday}}</td>
+        <td *ngIf="customer.customerGender === true">Male</td>
+        <td *ngIf="customer.customerGender === false">Female</td>
+        <td>{{customer.customerIdCard}}</td>
+        <td>{{customer.customerPhone}}</td>
+        <td>{{customer.customerEmail}}</td>
+        <td>{{customer.customerAddress}}</td>
+        <td><button class="btn btn-success btn-sm" routerLink="/customers/edit/{{customer.customerId}}">Edit</button></td>
+        <td><button class="btn btn-success btn-sm" (click)="getCustomerInfo(customer.customerId, customer.customerName)"
+                    data-toggle="modal" data-target="#deleteModal">Delete</button></td>
       </tr>
       </tbody>
     </table>
   </div>
 
   <div class="row justify-content-center">
-    <nav aria-label="...">
-      <ul class="pagination">
-        <li class="page-item disabled">
-          <a class="page-link" href="#" tabindex="-1">Previous</a>
-        </li>
-        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-        <li class="page-item">
-          <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item">
-          <a class="page-link" href="#">Next</a>
-        </li>
-      </ul>
-    </nav>
+    <pagination-controls (pageChange)="getPage(page = $event)"></pagination-controls>
   </div>
 </div>
 
@@ -125,11 +59,11 @@
         </button>
       </div>
       <div class="modal-body">
-        <p>Are you sure to delete this customer?</p>
+        <p>Are you sure to delete {{customerName}}?</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-success" data-dismiss="modal">Delete</button>
+        <button type="button" (click)="deleteCustomer()" class="btn btn-success" data-dismiss="modal">Delete</button>
       </div>
     </div>
   </div>

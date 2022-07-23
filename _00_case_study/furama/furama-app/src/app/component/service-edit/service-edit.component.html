@@ -40,17 +40,17 @@
         </div>
       </div>
       <div class="form-row">
-        <div class="col-md-4 mb-3">
+        <div class="col-md-4 mb-3" formGroupName="serviceType">
           <label for="serviceType">Service type</label>
-          <select class="form-control" formControlName="serviceType" id="serviceType" [value]="serviceTypeId">
-            <option [selected]="serviceTypeId == serviceType.serviceTypeId" *ngFor="let serviceType of serviceTypes"
+          <select class="form-control" formControlName="serviceTypeId" id="serviceType">
+            <option *ngFor="let serviceType of serviceTypes"
                     [value]="serviceType.serviceTypeId">{{serviceType.serviceTypeName}}</option>
           </select>
         </div>
-        <div class="col-md-4 mb-3">
+        <div class="col-md-4 mb-3" formGroupName="rentType">
           <label for="rentType">Rent type</label>
-          <select class="form-control" formControlName="rentType" id="rentType" [value]="rentTypeId">
-            <option [selected] = "rentTypeId == rentType.rentTypeId" *ngFor="let rentType of rentTypes"
+          <select class="form-control" formControlName="rentTypeId" id="rentType">
+            <option *ngFor="let rentType of rentTypes"
                     [value]= "rentType.rentTypeId">{{rentType.rentTypeName}}</option>
           </select>
         </div>

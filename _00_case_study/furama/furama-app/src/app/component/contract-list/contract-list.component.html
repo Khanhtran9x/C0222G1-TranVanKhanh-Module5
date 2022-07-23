@@ -1,4 +1,3 @@
-
 <div class="container">
   <div class="row justify-content-center service-banner" style="margin-top: 1rem">
     <h3 class="text-title text-white m-5" style="font-size: 3rem">Contract</h3>
@@ -13,56 +12,47 @@
         <th scope="col">Start date</th>
         <th scope="col">End date</th>
         <th scope="col">Deposit</th>
-        <th scope="col">Total money</th>
-        <th scope="col">Attach service</th>
-        <th scope="col">Edit</th>
         <th scope="col">Delete</th>
       </tr>
       </thead>
       <tbody>
-      <tr>
-        <td>1</td>
-        <td>Villa</td>
-        <td>Khanh Tran</td>
-        <td>2022-07-15</td>
-        <td>2022-07-16</td>
-        <td>100</td>
-        <td>1000</td>
-        <td>Free breakfast</td>
-        <td><button class="btn btn-success btn-sm">Edit</button></td>
-        <td><button class="btn btn-success btn-sm" data-toggle="modal" data-target="#deleteModal">Delete</button></td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>House</td>
-        <td>Kha Tran</td>
-        <td>2022-07-15</td>
-        <td>2022-07-16</td>
-        <td>100</td>
-        <td>1000</td>
-        <td>Free breakfast</td>
-        <td><button class="btn btn-success btn-sm">Edit</button></td>
-        <td><button class="btn btn-success btn-sm" data-toggle="modal" data-target="#deleteModal">Delete</button></td>
+      <tr *ngFor="let contract of contracts| paginate :
+          {itemsPerPage: itemsPerPage, currentPage: page, totalItems: totalItems }
+          ; index as i">
+        <td>{{i + 1}}</td>
+        <td>{{contract.service.serviceName}}</td>
+        <td>{{contract.customer.customerName}}</td>
+        <td>{{contract.contractStartDate}}</td>
+        <td>{{contract.contractEndDate}}</td>
+        <td>{{contract.contractDeposit}}</td>
+        <td><button class="btn btn-success btn-sm" (click)="getContractInfo(contract.contractId)"
+                    data-toggle="modal" data-target="#deleteModal">Delete</button></td>
       </tr>
       </tbody>
     </table>
   </div>
 
   <div class="row justify-content-center">
-    <nav aria-label="...">
-      <ul class="pagination">
-        <li class="page-item disabled">
-          <a class="page-link" href="#" tabindex="-1">Previous</a>
-        </li>
-        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-        <li class="page-item">
-          <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item">
-          <a class="page-link" href="#">Next</a>
-        </li>
-      </ul>
-    </nav>
+    <pagination-controls (pageChange)="getPage(page = $event)"></pagination-controls>
+  </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Notification</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure to delete this contract?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" (click)="deleteContract()" class="btn btn-success" data-dismiss="modal">Delete</button>
+      </div>
+    </div>
   </div>
 </div>

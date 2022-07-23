@@ -23,6 +23,7 @@ const routesConfig: Routes = [
   {path: '', component: IndexComponent},
   {path: 'customers', component: CustomerListComponent},
   {path: 'customers/create', component: CustomerCreateComponent},
+  {path: 'customers/edit/:id', component: CustomerEditComponent},
   {path: 'services', component: ServiceListComponent},
   {path: 'services/create', component: ServiceCreateComponent},
   {path: 'services/edit/:id', component: ServiceEditComponent},

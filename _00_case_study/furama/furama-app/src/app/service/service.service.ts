@@ -17,8 +17,11 @@ export class ServiceService {
   }
 
   getAllServices(page: number): Observable<Service[]> {
-    console.log(page);
     return this.http.get<Service[]>(API_URL + `/api/services?page=${page}`);
+  }
+
+  getAllServicesList(): Observable<Service[]> {
+    return this.http.get<Service[]>(API_URL + '/api/services/list');
   }
 
   getAllServiceTypes(): Observable<ServiceType[]> {

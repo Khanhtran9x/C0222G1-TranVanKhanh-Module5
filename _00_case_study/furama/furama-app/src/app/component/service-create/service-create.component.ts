@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {Service} from '../../interface/Service';
 import {ServiceType} from '../../interface/service-type';
 import {RentType} from '../../interface/rent-type';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ServiceService} from '../../service/service.service';
+import {validateAndRewriteCoreSymbol} from '@angular/compiler-cli/src/ngtsc/imports';
 
 @Component({
   selector: 'app-service-create',
@@ -12,7 +12,6 @@ import {ServiceService} from '../../service/service.service';
 })
 export class ServiceCreateComponent implements OnInit {
   serviceForm: FormGroup;
-  services: Service[] = [];
   serviceTypes: ServiceType[];
   rentTypes: RentType[];
 
@@ -22,21 +21,24 @@ export class ServiceCreateComponent implements OnInit {
   ngOnInit(): void {
     this.getAllServiceTypes();
     this.getAllRentTypes();
-    this.getAllServices();
 
     this.serviceForm = new FormGroup({
-      serviceCode: new FormControl(),
-      serviceName: new FormControl(),
-      serviceArea: new FormControl(),
-      serviceCost: new FormControl(),
-      serviceNumberOfFloors: new FormControl(),
-      serviceMaxPeople: new FormControl(),
-      servicePoolArea: new FormControl(),
-      serviceStandardRoom: new FormControl(),
-      serviceType: new FormControl(),
-      rentType: new FormControl(),
-      descriptionOtherConvenience: new FormControl(),
-      imgUrl: new FormControl()
+      serviceCode: new FormControl('', [Validators.required, Validators.pattern('^(DV-)\\d{4}$')]),
+      serviceName: new FormControl('', [Validators.required, Validators.pattern('[\\w\\s]+$')]),
+      serviceArea: new FormControl('', [Validators.required, Validators.min(0)]),
+      serviceCost: new FormControl('', [Validators.required, Validators.min(0)]),
+      serviceNumberOfFloors: new FormControl('', [Validators.required, Validators.min(1)]),
+      serviceMaxPeople: new FormControl('', [Validators.required, Validators.min(1)]),
+      servicePoolArea: new FormControl('', [Validators.required, Validators.min(1)]),
+      serviceStandardRoom: new FormControl('', Validators.required),
+      serviceType: new FormGroup({
+        serviceTypeId: new FormControl('', Validators.required)
+      }),
+      rentType: new FormGroup({
+        rentTypeId: new FormControl('', Validators.required)
+      }),
+      descriptionOtherConvenience: new FormControl('', Validators.required),
+      imgUrl: new FormControl('', Validators.required)
     });
   }
 
@@ -52,25 +54,12 @@ export class ServiceCreateComponent implements OnInit {
     });
   }
 
-  getAllServices() {
-    this.service.getAllServices(1).subscribe(services => {
-      console.log(services);
-      this.services = services;
-    });
-  }
-
   addNewService() {
-    const serviceObj = this.serviceForm.value;
-    serviceObj.serviceType = {
-      serviceTypeId: Number(this.serviceForm.value.serviceType)
-    };
-    serviceObj.rentType = {
-      rentTypeId: Number(this.serviceForm.value.rentType)
-    };
-    this.service.saveService(serviceObj)
+    this.service.saveService(this.serviceForm.value)
       .subscribe(
         response => {
           console.log(response);
+          console.log('ok');
         },
         error => {
           console.log(error);

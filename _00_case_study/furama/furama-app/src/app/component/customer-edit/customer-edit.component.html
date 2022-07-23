@@ -1,61 +1,65 @@
 <div class="container">
   <div class="row justify-content-center service-banner" style="margin-top: 1rem">
-    <h3 class="text-title text-white m-5" style="font-size: 3rem">Edit Customer</h3>
+    <h3 class="text-title text-white m-5" style="font-size: 3rem">Add New Customer</h3>
   </div>
   <div class="row justify-content-center" style="margin-top: 2rem; flex-wrap: wrap">
-    <form method="POST" class="needs-validation p-4"
+    <form [formGroup]="customerForm" (ngSubmit)="editCustomer()" class="needs-validation p-4"
           style="background-color: whitesmoke; border-radius: 1rem; width: 80%" novalidate>
       <div class="form-row">
         <div class="col-md-4 mb-3">
           <label for="validationCustom01">Customer code</label>
-          <input type="text" class="form-control" id="validationCustom01"
+          <input type="text" class="form-control" formControlName="customerCode" id="validationCustom01"
                  placeholder="KH-1234" value="" required>
         </div>
         <div class="col-md-4 mb-3">
           <label for="validationCustom02">Customer name</label>
-          <input type="text" class="form-control" id="validationCustom02"
+          <input type="text" class="form-control" formControlName="customerName" id="validationCustom02"
                  placeholder="Tran Van A" value="" required>
         </div>
-        <div class="col-md-4 mb-3">
+        <div class="col-md-4 mb-3" formGroupName="customerType">
           <label for="validationCustom02">Customer type</label>
-          <input type="text" class="form-control" id="validationCustom03"
-                 placeholder="Platinum" value="" required>
+          <select class="form-control" formControlName="customerTypeId" id="customerType">
+            <option *ngFor="let customerType of customerTypes"
+                    [value]="customerType.customerTypeId">{{customerType.customerTypeName}}</option>
+          </select>
         </div>
       </div>
       <div class="form-row">
         <div class="col-md-4 mb-3">
           <label for="validationCustom01">Customer ID card</label>
-          <input type="text" class="form-control" id="validationCustom04"
+          <input type="text" class="form-control" formControlName="customerIdCard" id="validationCustom04"
                  placeholder="1945XXXXX" value="" required>
         </div>
         <div class="col-md-4 mb-3">
           <label for="validationCustom02">Date of birth</label>
-          <input type="date" class="form-control" id="validationCustom05" value="" required>
+          <input type="date" class="form-control" formControlName="customerBirthday" id="validationCustom05" value="" required>
         </div>
         <div class="col-md-4 mb-3">
           <label for="validationCustom02">Customer phone</label>
-          <input type="text" class="form-control" id="validationCustom06"
+          <input type="text" class="form-control" formControlName="customerPhone" id="validationCustom06"
                  placeholder="090XXXXXXX" value="" required>
         </div>
       </div>
       <div class="form-row">
         <div class="col-md-4 mb-3">
-          <label for="validationCustom01">Customer gender</label>
-          <input type="text" class="form-control" id="validationCustom07"
-                 placeholder="Male" value="" required>
+          <label for="customerGender">Customer gender</label>
+          <select class="form-control" formControlName="customerGender" id="customerGender">
+            <option value="true">Male</option>
+            <option value="false">Female</option>
+          </select>
         </div>
         <div class="col-md-4 mb-3">
           <label for="validationCustom02">Customer address</label>
-          <input type="text" class="form-control" id="validationCustom08"
+          <input type="text" class="form-control" formControlName="customerAddress" id="validationCustom08"
                  placeholder="Da Nang" value="" required>
         </div>
         <div class="col-md-4 mb-3">
           <label for="validationCustom02">Customer email</label>
-          <input type="text" class="form-control" id="validationCustom09"
+          <input type="text" class="form-control" formControlName="customerEmail" id="validationCustom09"
                  placeholder="abc@gmail.com" value="" required>
         </div>
       </div>
-      <button class="btn btn-success text-white" type="submit">Update</button>
+      <button class="btn btn-success text-white" type="submit">Save</button>
     </form>
   </div>
 </div>

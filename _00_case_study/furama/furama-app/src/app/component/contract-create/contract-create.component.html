@@ -3,51 +3,57 @@
     <h3 class="text-title text-white m-5" style="font-size: 3rem">Add New Contract</h3>
   </div>
   <div class="row justify-content-center" style="margin-top: 2rem; flex-wrap: wrap">
-    <form method="POST" class="needs-validation p-4"
+    <form [formGroup]="contractForm" (ngSubmit)="addNewContract()" class="needs-validation p-4"
           style="background-color: whitesmoke; border-radius: 1rem; width: 80%" novalidate>
       <div class="form-row">
-        <div class="col-md-4 mb-3">
-          <label for="validationCustom01">Service</label>
-          <input type="text" class="form-control" id="validationCustom01"
-                 placeholder="Villa" value="" required>
+        <div class="col-md-4 mb-3" formGroupName="service">
+          <label for="service">Service</label>
+          <select class="form-control" formControlName="serviceId" id="service">
+            <option value="" disabled>Select service</option>
+            <option *ngFor="let service of services" [value]="service.serviceId">{{service.serviceName}}</option>
+          </select>
+          <p style="color: red; font-size: 0.9rem" *ngIf="contractForm.get('service').get('serviceId').touched
+                && contractForm.get('service').hasError('required', 'serviceId')">* Service is required</p>
+        </div>
+        <div class="col-md-4 mb-3" formGroupName="customer">
+          <label for="customer">Customer</label>
+          <select class="form-control" formControlName="customerId" id="customer">
+            <option value="" disabled>Select customer</option>
+            <option *ngFor="let customer of customers" [value]="customer.customerId">{{customer.customerName}}</option>
+          </select>
+          <p style="color: red; font-size: 0.9rem" *ngIf="contractForm.get('customer').get('customerId').touched
+                && contractForm.get('customer').hasError('required', 'customerId')">* Customer is required</p>
         </div>
         <div class="col-md-4 mb-3">
-          <label for="validationCustom02">Customer</label>
-          <input type="text" class="form-control" id="validationCustom02"
-                 placeholder="Tran Van A" value="" required>
-        </div>
-        <div class="col-md-4 mb-3">
-          <label for="validationCustom02">Start date</label>
-          <input type="date" class="form-control" id="validationCustom03" value="" required>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="col-md-4 mb-3">
-          <label for="validationCustom01">End date</label>
-          <input type="date" class="form-control" id="validationCustom04" value="" required>
-        </div>
-        <div class="col-md-4 mb-3">
-          <label for="validationCustom02">Deposit</label>
-          <input type="text" class="form-control" id="validationCustom05" placeholder="100" value="" required>
-        </div>
-        <div class="col-md-4 mb-3">
-          <label for="validationCustom02">Total money</label>
-          <input type="text" class="form-control" id="validationCustom06"
-                 placeholder="1000" value="" required>
+          <label for="startDate">Start date</label>
+          <input type="date" formControlName="contractStartDate" class="form-control" id="startDate" value="">
+          <p style="color: red; font-size: 0.9rem" *ngIf="contractForm.get('contractStartDate').touched
+                && contractForm.hasError('required', 'contractStartDate')">* Start date is required</p>
+          <p style="color: red; font-size: 0.9rem" *ngIf="contractForm.get('contractStartDate').touched
+                && contractForm.hasError('pattern', 'contractStartDate')">* Start date is invalid</p>
         </div>
       </div>
       <div class="form-row">
         <div class="col-md-4 mb-3">
-          <label for="validationCustom01">Attach service</label>
-          <input type="text" class="form-control" id="validationCustom07"
-                 placeholder="Free breakfast" value="" required>
+          <label for="endDate">End date</label>
+          <input type="date" formControlName="contractEndDate" class="form-control" id="endDate" value="">
+          <p style="color: red; font-size: 0.9rem" *ngIf="contractForm.get('contractEndDate').touched
+                && contractForm.hasError('required', 'contractEndDate')">* End date is required</p>
+          <p style="color: red; font-size: 0.9rem" *ngIf="contractForm.get('contractEndDate').touched
+                && contractForm.hasError('pattern', 'contractEndDate')">* End date is invalid</p>
         </div>
         <div class="col-md-4 mb-3">
+          <label for="deposit">Deposit</label>
+          <input type="text" formControlName="contractDeposit" class="form-control" id="deposit" placeholder="100" value="">
+          <p style="color: red; font-size: 0.9rem" *ngIf="contractForm.get('contractDeposit').touched
+                && contractForm.hasError('required', 'contractDeposit')">* Contract deposit is required</p>
+          <p style="color: red; font-size: 0.9rem" *ngIf="contractForm.get('contractDeposit').touched
+                && contractForm.hasError('min', 'contractDeposit')">* Contract deposit is invalid</p>
         </div>
         <div class="col-md-4 mb-3">
         </div>
       </div>
-      <button class="btn btn-success text-white" type="submit">Create</button>
+      <button class="btn btn-success text-white" [disabled]="contractForm.invalid" type="submit">Create</button>
     </form>
   </div>
 </div>
