@@ -1,0 +1,19 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "content": "Code",
+      "complete": true
+    },
+    {
+      "id": 2,
+      "content": "Study",
+      "complete": true
+    },
+    {
+      "id": 1,
+      "content": "Play game",
+      "complete": false
+    }
+  ]
+}
