@@ -1,60 +1,47 @@
 import {NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {Routes, RouterModule} from '@angular/router';
 import {HttpClientModule} from '@angular/common/http';
 import {NgxPaginationModule} from 'ngx-pagination';
 
 import {AppComponent} from './app.component';
 import {HeaderComponent} from './component/header/header.component';
 import {FooterComponent} from './component/footer/footer.component';
-import {ServiceListComponent} from './component/service-list/service-list.component';
-import {ServiceEditComponent} from './component/service-edit/service-edit.component';
-import {ServiceCreateComponent} from './component/service-create/service-create.component';
-import {CustomerListComponent} from './component/customer-list/customer-list.component';
-import {CustomerEditComponent} from './component/customer-edit/customer-edit.component';
-import {CustomerCreateComponent} from './component/customer-create/customer-create.component';
-import {ContractListComponent} from './component/contract-list/contract-list.component';
-import {ContractCreateComponent} from './component/contract-create/contract-create.component';
 import {IndexComponent} from './component/index/index.component';
 import {PageNotFoundComponent} from './component/page-not-found/page-not-found.component';
+import {AppRoutingModule} from './app-routing.module';
+import {FacilityModule} from './facility/facility.module';
+import {CustomerModule} from './customer/customer.module';
+import {ContractModule} from './contract/contract.module';
+import {ToastrModule} from 'ngx-toastr';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
-const routesConfig: Routes = [
-  {path: '', component: IndexComponent},
-  {path: 'customers', component: CustomerListComponent},
-  {path: 'customers/create', component: CustomerCreateComponent},
-  {path: 'customers/edit/:id', component: CustomerEditComponent},
-  {path: 'services', component: ServiceListComponent},
-  {path: 'services/create', component: ServiceCreateComponent},
-  {path: 'services/edit/:id', component: ServiceEditComponent},
-  {path: 'contracts', component: ContractListComponent},
-  {path: 'contracts/create', component: ContractCreateComponent},
-  {path: '**', component: PageNotFoundComponent},
-];
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    ServiceListComponent,
-    ServiceEditComponent,
-    ServiceCreateComponent,
-    CustomerListComponent,
-    CustomerEditComponent,
-    CustomerCreateComponent,
-    ContractListComponent,
-    ContractCreateComponent,
     IndexComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    RouterModule.forRoot(routesConfig),
     ReactiveFormsModule,
     HttpClientModule,
     NgxPaginationModule,
+    AppRoutingModule,
+    FacilityModule,
+    CustomerModule,
+    ContractModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      timeOut: 2000,
+      closeButton: true,
+      progressBar: true,
+      positionClass: 	'toast-top-right',
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]

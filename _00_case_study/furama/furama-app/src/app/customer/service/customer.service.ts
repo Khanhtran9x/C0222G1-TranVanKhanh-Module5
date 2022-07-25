@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Customer} from '../interface/customer';
-import {environment} from '../enviroment';
+import {environment} from '../../enviroment';
 import {CustomerType} from '../interface/customer-type';
 
 const API_URL = `${environment.apiUrl}`;
@@ -41,5 +41,9 @@ export class CustomerService {
 
   deleteCustomer(customerId): Observable<Customer> {
     return this.http.delete<Customer>(API_URL + `/api/customers/${customerId}`);
+  }
+
+  checkCustomerCode(code): Observable<Customer> {
+    return this.http.get<Customer>(API_URL + `/api/customers/code/${code}`);
   }
 }

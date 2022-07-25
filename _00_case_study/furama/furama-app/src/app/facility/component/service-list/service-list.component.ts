@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Service} from '../../interface/Service';
 import {ServiceService} from '../../service/service.service';
+import {ToastrService} from 'ngx-toastr';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-service-list',
@@ -15,7 +17,10 @@ export class ServiceListComponent implements OnInit {
   serviceName: string;
   services: Service[] = [];
 
-  constructor(private service: ServiceService) {
+  constructor(private service: ServiceService,
+              private toastr: ToastrService,
+              private title: Title) {
+    this.title.setTitle('Furama | Facility');
   }
 
   ngOnInit(): void {
@@ -27,6 +32,7 @@ export class ServiceListComponent implements OnInit {
       console.log(services);
       this.services = services.content;
       this.totalItems = services.totalElements;
+      this.toastr.success('Loaded successfully!', 'Facility');
     });
   }
 
@@ -50,6 +56,7 @@ export class ServiceListComponent implements OnInit {
         response => {
           console.log(response);
           this.getAllServices();
+          this.toastr.success('Deleted successfully!', 'Facility');
         },
         error => {
           console.log(error);

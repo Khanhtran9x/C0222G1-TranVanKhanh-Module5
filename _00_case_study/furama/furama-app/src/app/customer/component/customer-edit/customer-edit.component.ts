@@ -3,6 +3,8 @@ import {FormControl, FormGroup} from '@angular/forms';
 import {CustomerType} from '../../interface/customer-type';
 import {CustomerService} from '../../service/customer.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-customer-edit',
@@ -28,7 +30,11 @@ export class CustomerEditComponent implements OnInit {
   });
   constructor(private customerService: CustomerService,
               private activatedRoute: ActivatedRoute,
-              private router: Router) { }
+              private router: Router,
+              private toastr: ToastrService,
+              private title: Title) {
+    this.title.setTitle('Furama | Customer | Edit');
+  }
 
   ngOnInit(): void {
     this.id = Number(this.activatedRoute.snapshot.params.id);
@@ -52,6 +58,7 @@ export class CustomerEditComponent implements OnInit {
       .subscribe(
         response => {
           console.log(response);
+          this.toastr.success('Edited successfully!', 'Customer');
           this.router.navigateByUrl('/customers');
         },
         error => {

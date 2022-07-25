@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Customer} from '../../interface/customer';
 import {CustomerService} from '../../service/customer.service';
+import {ToastrService} from 'ngx-toastr';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-customer-list',
@@ -14,7 +16,11 @@ export class CustomerListComponent implements OnInit {
   customers: Customer[];
   customerId: number;
   customerName: string;
-  constructor(private customerService: CustomerService) { }
+  constructor(private customerService: CustomerService,
+              private toastr: ToastrService,
+              private title: Title) {
+    this.title.setTitle('Furama | Customer');
+  }
 
   ngOnInit(): void {
     this.getAllCustomers();
@@ -25,6 +31,7 @@ export class CustomerListComponent implements OnInit {
       console.log(customers);
       this.customers = customers.content;
       this.totalItems = customers.totalElements;
+      this.toastr.success('Loaded successfully!', 'Customer');
     });
   }
 
@@ -47,6 +54,7 @@ export class CustomerListComponent implements OnInit {
         response => {
           console.log(response);
           this.getAllCustomers();
+          this.toastr.success('Deleted successfully!', 'Customer');
         },
         error => {
           console.log(error);

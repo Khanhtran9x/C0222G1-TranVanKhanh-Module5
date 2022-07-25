@@ -1,10 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ContractService} from '../../service/contract.service';
-import {Service} from '../../interface/Service';
-import {Customer} from '../../customer/interface/customer';
-import {CustomerService} from '../../customer/service/customer.service';
-import {ServiceService} from '../../service/service.service';
+import {Service} from '../../../facility/interface/Service';
+import {Customer} from '../../../customer/interface/customer';
+import {CustomerService} from '../../../customer/service/customer.service';
+import {ServiceService} from '../../../facility/service/service.service';
+import {ToastrService} from 'ngx-toastr';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-contract-create',
@@ -18,7 +20,10 @@ export class ContractCreateComponent implements OnInit {
 
   constructor(private contractService: ContractService,
               private serviceService: ServiceService,
-              private customerService: CustomerService) {
+              private customerService: CustomerService,
+              private toastr: ToastrService,
+              private title: Title) {
+    this.title.setTitle('Furama | Contract | Create');
   }
 
   ngOnInit(): void {
@@ -39,7 +44,13 @@ export class ContractCreateComponent implements OnInit {
       employee: new FormGroup({
         employeeId: new FormControl(),
       }),
-    });
+    }, this.checkDate);
+  }
+
+  checkDate(abstractControl: AbstractControl): any {
+    const startDate = new Date(abstractControl.value.contractStartDate);
+    const endDate = new Date(abstractControl.value.contractEndDate);
+    return endDate > startDate ? null : {dateerror: true};
   }
 
   getAllServices() {
@@ -62,6 +73,7 @@ export class ContractCreateComponent implements OnInit {
         response => {
           console.log(response);
           console.log('ok');
+          this.toastr.success('Created successfully!', 'Contract Creation');
         },
         error => {
           console.log(error);

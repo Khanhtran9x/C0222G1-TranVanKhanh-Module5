@@ -41,6 +41,8 @@
                 && contractForm.hasError('required', 'contractEndDate')">* End date is required</p>
           <p style="color: red; font-size: 0.9rem" *ngIf="contractForm.get('contractEndDate').touched
                 && contractForm.hasError('pattern', 'contractEndDate')">* End date is invalid</p>
+          <p style="color: red; font-size: 0.9rem" *ngIf="contractForm.get('contractEndDate').touched
+                && contractForm.hasError('dateerror')">* End date must be after start date</p>
         </div>
         <div class="col-md-4 mb-3">
           <label for="deposit">Deposit</label>

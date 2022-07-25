@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Contract} from '../../interface/contract';
 import {ContractService} from '../../service/contract.service';
+import {ToastrService} from 'ngx-toastr';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-contract-list',
@@ -14,7 +16,11 @@ export class ContractListComponent implements OnInit {
   contracts: Contract[];
   contractId: number;
 
-  constructor(private contractService: ContractService) { }
+  constructor(private contractService: ContractService,
+              private toastr: ToastrService,
+              private title: Title) {
+    this.title.setTitle('Furama | Contract');
+  }
 
   ngOnInit(): void {
     this.getAllContracts();
@@ -25,6 +31,7 @@ export class ContractListComponent implements OnInit {
       console.log(contracts);
       this.contracts = contracts.content;
       this.totalItems = contracts.totalElements;
+      this.toastr.success('Loaded successfully!', 'Contract');
     });
   }
 
@@ -47,6 +54,7 @@ export class ContractListComponent implements OnInit {
         response => {
           console.log(response);
           this.getAllContracts();
+          this.toastr.success('Deleted successfully!', 'Contract');
         },
         error => {
           console.log(error);

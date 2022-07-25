@@ -10,16 +10,28 @@
           <label for="validationCustom01">Service code</label>
           <input type="text" class="form-control" formControlName="serviceCode" id="validationCustom01"
                  placeholder="SV-1234" value="" required>
+          <p style="color: red; font-size: 0.9rem" *ngIf="serviceForm.get('serviceCode').touched
+                && serviceForm.hasError('required', 'serviceCode')">* Service code is required</p>
+          <p style="color: red; font-size: 0.9rem" *ngIf="serviceForm.get('serviceCode').touched
+                && serviceForm.hasError('pattern', 'serviceCode')">* Service code is invalid</p>
         </div>
         <div class="col-md-4 mb-3">
           <label for="validationCustom02">Service name</label>
           <input type="text" class="form-control" formControlName="serviceName" id="validationCustom02"
                  placeholder="Villa" value="" required>
+          <p style="color: red; font-size: 0.9rem" *ngIf="serviceForm.get('serviceName').touched
+                && serviceForm.hasError('required', 'serviceName')">* Service name is required</p>
+          <p style="color: red; font-size: 0.9rem" *ngIf="serviceForm.get('serviceName').touched
+                && serviceForm.hasError('pattern', 'serviceName')">* Service name is invalid</p>
         </div>
         <div class="col-md-4 mb-3">
           <label for="validationCustom02">Service area</label>
           <input type="text" class="form-control" formControlName="serviceArea" id="validationCustom03"
                  placeholder="40" value="" required>
+          <p style="color: red; font-size: 0.9rem" *ngIf="serviceForm.get('serviceArea').touched
+                && serviceForm.hasError('required', 'serviceArea')">* Service area is required</p>
+          <p style="color: red; font-size: 0.9rem" *ngIf="serviceForm.get('serviceArea').touched
+                && serviceForm.hasError('min', 'serviceArea')">* Service area is invalid</p>
         </div>
       </div>
       <div class="form-row">
@@ -27,16 +39,28 @@
           <label for="validationCustom01">Service cost</label>
           <input type="text" class="form-control" formControlName="serviceCost" id="validationCustom04"
                  placeholder="30" value="" required>
+          <p style="color: red; font-size: 0.9rem" *ngIf="serviceForm.get('serviceCost').touched
+                && serviceForm.hasError('required', 'serviceCost')">* Service cost is required</p>
+          <p style="color: red; font-size: 0.9rem" *ngIf="serviceForm.get('serviceCost').touched
+                && serviceForm.hasError('min', 'serviceCost')">* Service cost is invalid</p>
         </div>
         <div class="col-md-4 mb-3">
           <label for="validationCustom02">Service max people</label>
           <input type="text" class="form-control" formControlName="serviceMaxPeople" id="validationCustom05"
                  placeholder="3" value="" required>
+          <p style="color: red; font-size: 0.9rem" *ngIf="serviceForm.get('serviceMaxPeople').touched
+                && serviceForm.hasError('required', 'serviceMaxPeople')">* Service max people is required</p>
+          <p style="color: red; font-size: 0.9rem" *ngIf="serviceForm.get('serviceMaxPeople').touched
+                && serviceForm.hasError('min', 'serviceMaxPeople')">* Service max people is invalid</p>
         </div>
         <div class="col-md-4 mb-3">
           <label for="validationCustom02">Number of floors</label>
           <input type="text" class="form-control" formControlName="serviceNumberOfFloors" id="validationCustom06"
                  placeholder="5" value="" required>
+          <p style="color: red; font-size: 0.9rem" *ngIf="serviceForm.get('serviceNumberOfFloors').touched
+                && serviceForm.hasError('required', 'serviceNumberOfFloors')">* Service floors is required</p>
+          <p style="color: red; font-size: 0.9rem" *ngIf="serviceForm.get('serviceNumberOfFloors').touched
+                && serviceForm.hasError('min', 'serviceNumberOfFloors')">* Service floors is invalid</p>
         </div>
       </div>
       <div class="form-row">
@@ -46,6 +70,8 @@
             <option *ngFor="let serviceType of serviceTypes"
                     [value]="serviceType.serviceTypeId">{{serviceType.serviceTypeName}}</option>
           </select>
+          <p style="color: red; font-size: 0.9rem" *ngIf="serviceForm.get('serviceType').get('serviceTypeId').touched
+                && serviceForm.get('serviceType').hasError('required', 'serviceTypeId')">* Service type is required</p>
         </div>
         <div class="col-md-4 mb-3" formGroupName="rentType">
           <label for="rentType">Rent type</label>
@@ -53,11 +79,17 @@
             <option *ngFor="let rentType of rentTypes"
                     [value]= "rentType.rentTypeId">{{rentType.rentTypeName}}</option>
           </select>
+          <p style="color: red; font-size: 0.9rem" *ngIf="serviceForm.get('rentType').get('rentTypeId').touched
+                && serviceForm.get('rentType').hasError('required', 'rentTypeId')">* Rent type is required</p>
         </div>
         <div class="col-md-4 mb-3">
           <label for="poolArea">Service pool area</label>
           <input type="text" class="form-control" formControlName="servicePoolArea" id="poolArea"
                  placeholder="30" value="" required>
+          <p style="color: red; font-size: 0.9rem" *ngIf="serviceForm.get('servicePoolArea').touched
+                && serviceForm.hasError('required', 'servicePoolArea')">* Service pool area is required</p>
+          <p style="color: red; font-size: 0.9rem" *ngIf="serviceForm.get('servicePoolArea').touched
+                && serviceForm.hasError('min', 'servicePoolArea')">* Service pool area is invalid</p>
         </div>
       </div>
       <div class="form-row">
@@ -65,15 +97,23 @@
           <label for="roomStandard">Room standard</label>
           <input type="text" class="form-control" formControlName="serviceStandardRoom" id="roomStandard"
                  placeholder="Normal" value="" required>
+          <p style="color: red; font-size: 0.9rem" *ngIf="serviceForm.get('serviceStandardRoom').touched
+                && serviceForm.hasError('required', 'serviceStandardRoom')">* Service room standard area is required</p>
+          <p style="color: red; font-size: 0.9rem" *ngIf="serviceForm.get('serviceStandardRoom').touched
+                && serviceForm.hasError('min', 'serviceStandardRoom')">* Service room standard is invalid</p>
         </div>
         <div class="col-md-4 mb-3">
           <label for="otherConvenience">Other convenience</label>
           <input type="text" class="form-control" formControlName="descriptionOtherConvenience" id="otherConvenience"
                  placeholder="Free breakfast" value="" required>
+          <p style="color: red; font-size: 0.9rem" *ngIf="serviceForm.get('descriptionOtherConvenience').touched
+                && serviceForm.hasError('required', 'descriptionOtherConvenience')">* Other convenience is required</p>
         </div>
         <div class="col-md-4 mb-3">
           <label for="bannerUrl">Banner Image Url</label>
           <input type="text" class="form-control" formControlName="imgUrl" id="bannerUrl" value="" required>
+          <p style="color: red; font-size: 0.9rem" *ngIf="serviceForm.get('imgUrl').touched
+                && serviceForm.hasError('required', 'imgUrl')">* Img Url is required</p>
         </div>
       </div>
 

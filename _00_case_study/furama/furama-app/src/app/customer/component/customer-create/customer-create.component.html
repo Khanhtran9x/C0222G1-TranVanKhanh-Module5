@@ -51,6 +51,8 @@
                 && customerForm.hasError('required', 'customerBirthday')">* Customer birthday is required</p>
           <p style="color: red; font-size: 0.9rem" *ngIf="customerForm.get('customerBirthday').touched
                 && customerForm.hasError('pattern', 'customerBirthday')">* Customer birthday is invalid</p>
+          <p style="color: red; font-size: 0.9rem" *ngIf="customerForm.get('customerBirthday').dirty
+                && customerForm.hasError('not18', 'customerBirthday')">* Customer age must be over 18</p>
         </div>
         <div class="col-md-4 mb-3">
           <label for="validationCustom02">Customer phone</label>

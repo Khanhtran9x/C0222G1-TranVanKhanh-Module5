@@ -4,6 +4,8 @@ import {RentType} from '../../interface/rent-type';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {ServiceService} from '../../service/service.service';
 import {validateAndRewriteCoreSymbol} from '@angular/compiler-cli/src/ngtsc/imports';
+import {ToastrService} from 'ngx-toastr';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-service-create',
@@ -15,7 +17,10 @@ export class ServiceCreateComponent implements OnInit {
   serviceTypes: ServiceType[];
   rentTypes: RentType[];
 
-  constructor(private service: ServiceService) {
+  constructor(private service: ServiceService,
+              private toastr: ToastrService,
+              private title: Title) {
+    this.title.setTitle('Furama | Facility | Create');
   }
 
   ngOnInit(): void {
@@ -60,6 +65,7 @@ export class ServiceCreateComponent implements OnInit {
         response => {
           console.log(response);
           console.log('ok');
+          this.toastr.success('Created successfully!', 'Facility');
         },
         error => {
           console.log(error);

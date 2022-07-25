@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {ServiceService} from '../../service/service.service';
-import {Form, FormControl, FormGroup} from '@angular/forms';
-import {Service} from '../../interface/Service';
+import {Form, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ServiceType} from '../../interface/service-type';
 import {RentType} from '../../interface/rent-type';
+import {ToastrService} from 'ngx-toastr';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-service-edit',
@@ -17,27 +18,30 @@ export class ServiceEditComponent implements OnInit {
   rentTypes: RentType[];
   serviceForm = new FormGroup({
     serviceId: new FormControl(),
-    serviceCode: new FormControl(),
-    serviceName: new FormControl(),
-    serviceArea: new FormControl(),
-    serviceCost: new FormControl(),
-    serviceNumberOfFloors: new FormControl(),
-    serviceMaxPeople: new FormControl(),
-    servicePoolArea: new FormControl(),
-    serviceStandardRoom: new FormControl(),
+    serviceCode: new FormControl('', [Validators.required, Validators.pattern('^(DV-)\\d{4}$')]),
+    serviceName: new FormControl('', [Validators.required, Validators.pattern('[\\w\\s]+$')]),
+    serviceArea: new FormControl('', [Validators.required, Validators.min(0)]),
+    serviceCost: new FormControl('', [Validators.required, Validators.min(0)]),
+    serviceNumberOfFloors: new FormControl('', [Validators.required, Validators.min(1)]),
+    serviceMaxPeople: new FormControl('', [Validators.required, Validators.min(1)]),
+    servicePoolArea: new FormControl('', [Validators.required, Validators.min(1)]),
+    serviceStandardRoom: new FormControl('', Validators.required),
     serviceType: new FormGroup({
-      serviceTypeId: new FormControl()
+      serviceTypeId: new FormControl('', Validators.required)
     }),
     rentType: new FormGroup({
-      rentTypeId: new FormControl()
+      rentTypeId: new FormControl('', Validators.required)
     }),
-    descriptionOtherConvenience: new FormControl(),
-    imgUrl: new FormControl()
+    descriptionOtherConvenience: new FormControl('', Validators.required),
+    imgUrl: new FormControl('', Validators.required)
   });
 
   constructor(private service: ServiceService,
               private activatedRoute: ActivatedRoute,
-              private router: Router) {
+              private router: Router,
+              private toastr: ToastrService,
+              private title: Title) {
+    this.title.setTitle('Furama | Facility | Edit');
   }
 
   ngOnInit(): void {
@@ -71,6 +75,7 @@ export class ServiceEditComponent implements OnInit {
         response => {
           console.log(response);
           console.log('ok');
+          this.toastr.success('Edited successfully!', 'Facility');
         },
         error => {
           console.log(error);
