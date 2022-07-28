@@ -1,0 +1,24 @@
+{
+  "products": [
+    {
+      "id": 2,
+      "name": "Iphone 13 Pro Max",
+      "price": 1512,
+      "description": "Best smartphone",
+      "category": {
+        "id": 2,
+        "name": "Laptop"
+      }
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "name": "Cell phone"
+    },
+    {
+      "id": 2,
+      "name": "Laptop"
+    }
+  ]
+}
