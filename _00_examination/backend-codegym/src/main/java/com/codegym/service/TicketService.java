@@ -28,7 +28,6 @@ public class TicketService implements ITicketService {
     @Override
     public void save(Ticket ticket) {
         iTicketRepository.save(ticket);
-
     }
 
     @Override

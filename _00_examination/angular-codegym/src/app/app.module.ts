@@ -14,6 +14,7 @@ import {ToastrModule} from 'ngx-toastr';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { TicketListComponent } from './ticket/component/ticket-list/ticket-list.component';
 import { TicketCreateComponent } from './ticket/component/ticket-create/ticket-create.component';
+import { TicketEditComponent } from './ticket/component/ticket-edit/ticket-edit.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { TicketCreateComponent } from './ticket/component/ticket-create/ticket-c
     FooterComponent,
     TicketListComponent,
     TicketCreateComponent,
+    TicketEditComponent,
   ],
   imports: [
     BrowserModule,

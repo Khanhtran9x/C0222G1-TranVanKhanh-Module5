@@ -31,6 +31,16 @@ public class TicketRestController {
     }
 
     @CrossOrigin
+    @GetMapping("/{id}")
+    public ResponseEntity<?> findById(@PathVariable Integer id){
+        Optional<Ticket> ticket = ticketService.findById(id);
+        if (!ticket.isPresent()){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(ticket.get(), HttpStatus.OK);
+    }
+
+    @CrossOrigin
     @PostMapping
     public ResponseEntity<?> createTicket(@RequestBody Ticket ticket) {
         ticketService.save(ticket);

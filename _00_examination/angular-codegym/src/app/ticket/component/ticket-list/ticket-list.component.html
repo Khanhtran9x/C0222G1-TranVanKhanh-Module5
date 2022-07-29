@@ -61,8 +61,7 @@
         <td>{{ticket.number}}</td>
         <td><button class="btn bg-color text-white btn-sm"(click)="getTicketInfo(ticket)" data-toggle="modal"
                     data-target="#bookModal">Book</button></td>
-        <td><button class="btn bg-color text-white btn-sm" routerLink="/tickets/edit/{{ticket.id}}" data-toggle="modal"
-                    data-target="#bookModal">Edit</button></td>
+        <td><button class="btn bg-color text-white btn-sm" routerLink="/ticket/edit/{{ticket.id}}">Edit</button></td>
         <td><button class="btn bg-color text-white btn-sm"(click)="getTicketInfo(ticket)" data-toggle="modal"
                     data-target="#deleteModal">Delete</button></td>
       </tr>
@@ -110,7 +109,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <p>Are you sure to book ticket from {{startPointConfirm}}</p>
+        <p>Are you sure to delete ticket from {{startPointConfirm}}</p>
         <p>to {{endPointConfirm}} at {{hourConfirm}} in {{startDateConfirm}}?</p>
       </div>
       <div class="modal-footer">

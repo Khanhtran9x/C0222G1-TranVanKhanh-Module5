@@ -26,6 +26,10 @@ export class TicketService {
     return this.http.put<Ticket>(`${API_URL}/tickets/${id}`, ticket);
   }
 
+  findById(id: number): Observable<Ticket> {
+    return this.http.get<Ticket>(API_URL + `/tickets/${id}`);
+  }
+
   delete(id: number): Observable<Ticket> {
     return this.http.delete<Ticket>(`${API_URL}/tickets/${id}`);
   }
