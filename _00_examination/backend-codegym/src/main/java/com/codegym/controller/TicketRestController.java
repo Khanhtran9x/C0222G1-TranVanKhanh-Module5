@@ -60,7 +60,7 @@ public class TicketRestController {
     }
 
     @CrossOrigin
-    @GetMapping("/{startPoint}&{endPoint}&{startDate}&{endDate}")
+    @GetMapping("/search/{startPoint}&{endPoint}&{startDate}&{endDate}")
     public ResponseEntity<?> search(@PathVariable String startPoint, @PathVariable String endPoint,
                                     @PathVariable String startDate, @PathVariable String endDate,
                                     @RequestParam(name = "page", defaultValue = "0") int page) {

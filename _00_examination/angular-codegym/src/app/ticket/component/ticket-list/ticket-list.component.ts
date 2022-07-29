@@ -67,9 +67,25 @@ export class TicketListComponent implements OnInit {
   }
 
   search() {
+    if (this.startDateSearch === '') {
+      this.startDateSearch = '2000-01-01';
+    }
+    if (this.endDateSearch === '') {
+      this.endDateSearch = '2200-01-01';
+    }
     this.ticketService.search(this.startPointSearch, this.endPointSearch,
       this.startDateSearch, this.endDateSearch).subscribe((tickets: any) => {
-      this.tickets = tickets.content;
+      if (this.startDateSearch === '2000-01-01') {
+        this.startDateSearch = '';
+      }
+      if (this.endDateSearch === '2200-01-01') {
+        this.endDateSearch = '';
+      }
+      if (tickets != null) {
+        this.tickets = tickets.content;
+      } else {
+        this.tickets = [];
+      }
       this.page = 1;
     });
   }

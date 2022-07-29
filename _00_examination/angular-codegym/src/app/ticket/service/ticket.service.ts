@@ -35,11 +35,7 @@ export class TicketService {
   }
 
   search(startPoint: string, endPoint: string, startDate: string, endDate: string): Observable<Ticket[]> {
-    console.log(startPoint);
-    console.log(endPoint);
-    console.log(startDate);
-    console.log(endDate);
     return this.http.get<Ticket[]>
-    (`${API_URL}/tickets/${startPoint}&${endPoint}&${startDate}&${endDate}`);
+    (`${API_URL}/tickets/search/${startPoint}&${endPoint}&${startDate}&${endDate}`);
   }
 }

@@ -4,25 +4,45 @@
       <div class="form-inline my-2 my-lg-0">
         <div class="row" style="margin-bottom: 1rem">
           <div class="col-4">
-            <input class="form-control mr-sm-2" [(ngModel)]="startPointSearch" style="background-color: #f2f2f2; margin-right: 1rem" type="search"
-                   placeholder="Start point"
-                   aria-label="Search">
+            <div class="row">
+              <input class="form-control mr-sm-2"
+                     [(ngModel)]="startPointSearch" style="background-color: #f2f2f2; width: 100%" type="search"
+                     placeholder="Start point"
+                     aria-label="Search">
+            </div>
           </div>
           <div class="col-4">
-            <input class="form-control mr-sm-2" [(ngModel)]="endPointSearch" style="background-color: #f2f2f2; margin-left: 5rem" type="search"
-                   placeholder="End point"
-                   aria-label="Search">
+            <div class="row">
+              <input class="form-control mr-sm-2"
+                     [(ngModel)]="endPointSearch" style="background-color: #f2f2f2; width: 100%" type="search"
+                     placeholder="End point"
+                     aria-label="Search">
+            </div>
           </div>
           <div class="col-4">
           </div>
         </div>
-        <input class="form-control mr-sm-2" style="background-color: #f2f2f2" type="date"
-               placeholder="Start date"
-               aria-label="Search" [(ngModel)]="startDateSearch">
-        <input class="form-control mr-sm-2" style="background-color: #f2f2f2" type="date"
-               placeholder="End date"
-               aria-label="Search" [(ngModel)]="endDateSearch">
-        <button class="btn btn-dark my-2 my-sm-0" (click)="search()">Search</button>
+        <div class="row" style="margin-bottom: 1rem">
+          <div class="col-4">
+            <div class="row">
+              <input class="form-control" style="background-color: #f2f2f2; width: 100%; margin-right: 1rem" type="date"
+                     placeholder="Start date"
+                     aria-label="Search" [(ngModel)]="startDateSearch">
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="row">
+              <input class="form-control" style="background-color: #f2f2f2; width: 100%; margin-left: 0.8rem" type="date"
+                     placeholder="End date"
+                     aria-label="Search" [(ngModel)]="endDateSearch">
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="row ml-1">
+              <button class="btn btn-dark my-2 my-sm-0" (click)="search()">Search</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="col-4 justify-content-center">
@@ -59,11 +79,19 @@
         <td>{{ticket.startHour}}</td>
         <td>{{ticket.brand.name}}</td>
         <td>{{ticket.number}}</td>
-        <td><button class="btn bg-color text-white btn-sm"(click)="getTicketInfo(ticket)" data-toggle="modal"
-                    data-target="#bookModal">Book</button></td>
-        <td><button class="btn bg-color text-white btn-sm" routerLink="/ticket/edit/{{ticket.id}}">Edit</button></td>
-        <td><button class="btn bg-color text-white btn-sm"(click)="getTicketInfo(ticket)" data-toggle="modal"
-                    data-target="#deleteModal">Delete</button></td>
+        <td>
+          <button class="btn bg-color text-white btn-sm" (click)="getTicketInfo(ticket)" data-toggle="modal"
+                  data-target="#bookModal">Book
+          </button>
+        </td>
+        <td>
+          <button class="btn bg-color text-white btn-sm" routerLink="/ticket/edit/{{ticket.id}}">Edit</button>
+        </td>
+        <td>
+          <button class="btn bg-color text-white btn-sm" (click)="getTicketInfo(ticket)" data-toggle="modal"
+                  data-target="#deleteModal">Delete
+          </button>
+        </td>
       </tr>
       </tbody>
     </table>
