@@ -34,14 +34,16 @@ export class TicketListComponent implements OnInit {
   getAll() {
     this.ticketService.getAll(0).subscribe((tickets: any) => {
       this.tickets = tickets.content;
+      this.totalItems = tickets.totalElements;
     });
   }
 
   getPage(page) {
     this.page = page;
     page = page - 1;
-    this.ticketService.getAll(page).subscribe(tickets => {
-      this.tickets = tickets;
+    this.ticketService.getAll(page).subscribe((tickets: any)=> {
+      this.tickets = tickets.content;
+      this.totalItems = tickets.totalElements;
     });
   }
 

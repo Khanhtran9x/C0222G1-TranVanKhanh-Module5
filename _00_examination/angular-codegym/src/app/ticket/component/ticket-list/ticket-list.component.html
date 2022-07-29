@@ -74,8 +74,8 @@
         <td>{{i + 1}}</td>
         <td>{{ticket.startPoint}}</td>
         <td>{{ticket.endPoint}}</td>
-        <td>{{ticket.price}}</td>
-        <td>{{ticket.startDate}}</td>
+        <td>{{ticket.price | currency}}</td>
+        <td>{{ticket.startDate |  date:"dd/MM/yy"}}</td>
         <td>{{ticket.startHour}}</td>
         <td>{{ticket.brand.name}}</td>
         <td>{{ticket.number}}</td>
