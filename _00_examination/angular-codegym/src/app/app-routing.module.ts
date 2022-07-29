@@ -1,24 +1,21 @@
-import { NgModule } from '@angular/core';
+import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {ProductComponent} from './component/product/product.component';
-import {ProductCreateComponent} from './component/product-create/product-create.component';
-import {ProductEditComponent} from './component/product-edit/product-edit.component';
+import {IndexComponent} from './common-component/index/index.component';
+import {TicketListComponent} from './ticket/component/ticket-list/ticket-list.component';
+import {TicketCreateComponent} from './ticket/component/ticket-create/ticket-create.component';
 
-const routes: Routes = [{
-  path: '',
-  component: ProductComponent
-},
+const routes: Routes = [
   {
-    path: 'product/edit/:id',
-    component: ProductEditComponent
+    path: '',
+    component: IndexComponent
   },
   {
-    path: 'product/delete:id',
-    component: ProductComponent
+    path: 'ticket',
+    component: TicketListComponent
   },
   {
-    path: 'product/create',
-    component: ProductCreateComponent
+    path: 'ticket/create',
+    component: TicketCreateComponent
   }];
 
 @NgModule({
@@ -26,4 +23,5 @@ const routes: Routes = [{
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}
