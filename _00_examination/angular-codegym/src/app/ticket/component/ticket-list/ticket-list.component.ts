@@ -73,4 +73,11 @@ export class TicketListComponent implements OnInit {
       this.page = 1;
     });
   }
+
+  delete() {
+    this.ticketService.delete(this.ticket.id).subscribe(res => {
+      this.getAll();
+      this.toastr.success('Deleted successfully!', 'Ticket');
+    });
+  }
 }
