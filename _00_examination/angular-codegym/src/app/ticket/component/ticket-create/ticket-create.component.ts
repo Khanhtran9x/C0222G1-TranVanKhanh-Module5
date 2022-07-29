@@ -29,9 +29,11 @@ export class TicketCreateComponent implements OnInit {
       startDate: new FormControl('', [Validators.required,
         Validators.pattern('^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$')]),
       startHour: new FormControl('', [Validators.required, Validators.pattern('^[0-2]{1}[0-9]{1}(:)[0-6]{1}[0-9]{1}$')]),
-      brand: new FormControl(''),
-      number: new FormControl('', [Validators.required, Validators.pattern('^\\d+$')]),
-      price: new FormControl('', [Validators.required, Validators.pattern('^\\d+$')])
+      brand: new FormGroup({
+        id: new FormControl('', Validators.required)
+      }),
+      number: new FormControl('', [Validators.required, Validators.pattern('^[1-9]\\d*$')]),
+      price: new FormControl('', [Validators.required, Validators.pattern('^^[1-9]\\d*$')])
     }, this.checkStartDate);
   }
 

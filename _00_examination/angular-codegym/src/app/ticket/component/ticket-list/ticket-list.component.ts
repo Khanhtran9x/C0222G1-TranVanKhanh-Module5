@@ -22,6 +22,8 @@ export class TicketListComponent implements OnInit {
   endPointConfirm = '';
   hourConfirm = '';
   startDateConfirm = '';
+  bookState = true;
+  soldOutState = false;
 
   constructor(private ticketService: TicketService,
               private toastr: ToastrService) {
@@ -41,13 +43,20 @@ export class TicketListComponent implements OnInit {
   getPage(page) {
     this.page = page;
     page = page - 1;
-    this.ticketService.getAll(page).subscribe((tickets: any)=> {
+    this.ticketService.getAll(page).subscribe((tickets: any) => {
       this.tickets = tickets.content;
       this.totalItems = tickets.totalElements;
     });
   }
 
   getTicketInfo(ticket: Ticket) {
+    if (Number(ticket.number) === 0) {
+      this.soldOutState = true;
+      this.bookState = false;
+    } else {
+      this.bookState = true;
+      this.soldOutState = false;
+    }
     this.ticket = ticket;
     this.startPointConfirm = ticket.startPoint;
     this.endPointConfirm = ticket.endPoint;
@@ -56,8 +65,10 @@ export class TicketListComponent implements OnInit {
   }
 
   book() {
-    if (this.ticket.number === 0) {
+    console.log(this.ticket.number);
+    if (Number(this.ticket.number) === 0) {
       this.toastr.warning('Sold out!', 'Ticket');
+      this.bookState = false;
     } else {
       this.ticket.number -= 1;
       console.log(this.ticket);

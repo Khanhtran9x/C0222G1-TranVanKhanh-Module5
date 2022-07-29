@@ -113,12 +113,18 @@
         </button>
       </div>
       <div class="modal-body">
-        <p>Are you sure to book ticket from {{startPointConfirm}}</p>
-        <p>to {{endPointConfirm}} at {{hourConfirm}} in {{startDateConfirm}}?</p>
+        <div *ngIf="bookState">
+          <p>Are you sure to book ticket from {{startPointConfirm}}</p>
+          <p>to {{endPointConfirm}} at {{hourConfirm}} in {{startDateConfirm}}?</p>
+        </div>
+        <div *ngIf="soldOutState">
+          <p>Sold out!</p>
+        </div>
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" (click)="book()" class="btn bg-color text-white" data-dismiss="modal">Book
+        <button type="button" *ngIf="bookState" (click)="book()" class="btn bg-color text-white" data-dismiss="modal">Book
         </button>
       </div>
     </div>

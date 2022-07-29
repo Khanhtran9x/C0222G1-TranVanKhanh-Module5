@@ -20,15 +20,14 @@
           <p style="color: red; font-size: 0.9rem" *ngIf="ticketForm.get('endPoint').touched
                 && ticketForm.hasError('required', 'endPoint')">End point is required</p>
         </div>
-        <div class="col-md-4 mb-3">
+        <div class="col-md-4 mb-3" formGroupName="brand">
           <label for="brand">Brand</label>
-          <select class="form-control" formControlName="brand" id="brand">
+          <select class="form-control" formControlName="id" id="brand">
             <option value="" disabled>Choose brand</option>
-            <option *ngFor="let brand of brands"
-                    [ngValue] ="brand">{{brand.name}}</option>
+            <option *ngFor="let brand of brands" [value]="brand.id">{{brand.name}}</option>
           </select>
-          <p style="color: red; font-size: 0.9rem" *ngIf="ticketForm.get('brand').touched
-                && ticketForm.hasError('required', 'brand')">Brand is required</p>
+          <p style="color: red; font-size: 0.9rem" *ngIf="ticketForm.get('brand').get('id').touched
+                && ticketForm.get('brand').hasError('required', 'id')">Brand is required</p>
         </div>
       </div>
       <div class="form-row">
@@ -39,7 +38,7 @@
                 && ticketForm.hasError('required', 'startDate')">Start date is required</p>
           <p style="color: red; font-size: 0.9rem" *ngIf="ticketForm.get('startDate').touched
                 && ticketForm.hasError('pattern', 'startDate')">Start date is invalid, it should be dd/MM/yyyy</p>
-          <p style="color: red; font-size: 0.9rem" *ngIf="ticketForm.get('startDate').touched
+          <p style="color: red; font-size: 0.9rem" *ngIf="ticketForm.get('startDate').dirty
                 && ticketForm.hasError('dateerror')">Start date must be after today 1 day</p>
         </div>
         <div class="col-md-4 mb-3">
