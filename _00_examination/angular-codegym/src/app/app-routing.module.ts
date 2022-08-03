@@ -8,7 +8,7 @@ import {LoginComponent} from './authentication/component/login/login.component';
 import {LogoutComponent} from './authentication/component/logout/logout.component';
 import {AuthGuard} from './authentication/service/auth-guard.service';
 import {NotAuthorizedComponent} from './common-component/not-authorized/not-authorized.component';
-import {ChatroomComponent} from './firebase-chat/component/chatroom/chatroom.component';
+import {FirebaseChatComponent} from './firebase-chat/component/firebase-chat.component';
 
 const routes: Routes = [
   {
@@ -37,7 +37,8 @@ const routes: Routes = [
   },
   {
     path: 'chat',
-    component: ChatroomComponent
+    component: FirebaseChatComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'login',

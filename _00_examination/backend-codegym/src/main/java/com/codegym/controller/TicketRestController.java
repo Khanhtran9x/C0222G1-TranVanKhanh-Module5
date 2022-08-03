@@ -23,7 +23,7 @@ public class TicketRestController {
     @GetMapping
     public ResponseEntity<?> allTickets(@RequestParam(name = "page", defaultValue = "0") int page) {
         Sort sort = Sort.by("id").ascending();
-        Page<Ticket> tickets = ticketService.findAll(PageRequest.of(page, 4, sort));
+        Page<Ticket> tickets = ticketService.findAll(PageRequest.of(page, 5, sort));
         if (tickets.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
@@ -40,12 +40,12 @@ public class TicketRestController {
         return new ResponseEntity<>(ticket.get(), HttpStatus.OK);
     }
 
-    @CrossOrigin
-    @PostMapping
+    @CrossOrigin @PostMapping
     public ResponseEntity<?> createTicket(@RequestBody Ticket ticket) {
         ticketService.save(ticket);
         return new ResponseEntity<>(ticket, HttpStatus.CREATED);
     }
+
 
     @CrossOrigin
     @PutMapping("/{id}")

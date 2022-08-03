@@ -11,7 +11,7 @@ import {ToastrService} from 'ngx-toastr';
 export class TicketListComponent implements OnInit {
   page = 1;
   totalItems: any;
-  itemsPerPage = 4;
+  itemsPerPage = 5;
   tickets: Ticket[];
   ticket: Ticket;
   startPointSearch = '';

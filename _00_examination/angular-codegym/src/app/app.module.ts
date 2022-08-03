@@ -20,8 +20,10 @@ import { LoginComponent } from './authentication/component/login/login.component
 import {AuthInterceptor} from './authentication/model/auth-interceptor';
 import { LogoutComponent } from './authentication/component/logout/logout.component';
 import { NotAuthorizedComponent } from './common-component/not-authorized/not-authorized.component';
-import {RoomlistComponent} from './firebase-chat/component/roomlist/roomlist.component';
-import {ChatroomComponent} from './firebase-chat/component/chatroom/chatroom.component';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireDatabase } from '@angular/fire/database';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -36,8 +38,6 @@ import {ChatroomComponent} from './firebase-chat/component/chatroom/chatroom.com
     LoginComponent,
     LogoutComponent,
     NotAuthorizedComponent,
-    RoomlistComponent,
-    ChatroomComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,6 +47,8 @@ import {ChatroomComponent} from './firebase-chat/component/chatroom/chatroom.com
     FormsModule,
     NgxPaginationModule,
     BrowserAnimationsModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFirestoreModule,
     HttpClientModule,
     ToastrModule.forRoot({
       timeOut: 2000,

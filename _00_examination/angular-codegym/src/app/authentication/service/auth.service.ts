@@ -48,6 +48,10 @@ export class AuthService {
     this.router.navigate(['/login']);
   }
 
+  getAllUsers(): Observable<User[]> {
+    return this.http.get<User[]>(this.baseUrl + 'users');
+  }
+
   isLoggedIn(): boolean {
     return sessionStorage.getItem('username') !== null;
   }
