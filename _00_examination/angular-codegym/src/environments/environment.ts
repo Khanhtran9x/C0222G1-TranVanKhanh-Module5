@@ -6,14 +6,14 @@
 export const environment = {
   production: false,
   firebaseConfig: {
-    apiKey: 'AIzaSyDgjTHUCwrAkv1m9P-ADKGW05l_hWNyOdE',
-    authDomain: 'codegym-khanh-tran.firebaseapp.com',
-    databaseURL: 'https://codegym-khanh-tran-default-rtdb.firebaseio.com',
-    projectId: 'codegym-khanh-tran',
-    storageBucket: 'codegym-khanh-tran.appspot.com',
-    messagingSenderId: '1019015133392',
-    appId: '1:1019015133392:web:2a2d01d93e7b4b10a546d5',
-    measurementId: 'G-ZZGPLK8DFS'
+    apiKey: 'AIzaSyBSUbIYq8Eeyj4PLEYTOzsx-6504viMFpk',
+    authDomain: 'c0222g1-codegym.firebaseapp.com',
+    databaseURL: 'https://c0222g1-codegym-default-rtdb.firebaseio.com',
+    projectId: 'c0222g1-codegym',
+    storageBucket: 'c0222g1-codegym.appspot.com',
+    messagingSenderId: '304675475646',
+    appId: '1:304675475646:web:3b9a366587a20cd1134eef',
+    measurementId: 'G-DZ70EGTRXM'
   }
 };
 

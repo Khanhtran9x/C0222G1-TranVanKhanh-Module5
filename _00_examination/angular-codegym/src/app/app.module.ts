@@ -24,6 +24,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { environment } from '../environments/environment';
+import { UploadImageComponent } from './upload-image/component/upload-image.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { environment } from '../environments/environment';
     LoginComponent,
     LogoutComponent,
     NotAuthorizedComponent,
+    UploadImageComponent,
   ],
   imports: [
     BrowserModule,

@@ -9,6 +9,7 @@ import {LogoutComponent} from './authentication/component/logout/logout.componen
 import {AuthGuard} from './authentication/service/auth-guard.service';
 import {NotAuthorizedComponent} from './common-component/not-authorized/not-authorized.component';
 import {FirebaseChatComponent} from './firebase-chat/component/firebase-chat.component';
+import {UploadImageComponent} from './upload-image/component/upload-image.component';
 
 const routes: Routes = [
   {
@@ -39,6 +40,10 @@ const routes: Routes = [
     path: 'chat',
     component: FirebaseChatComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'upload',
+    component: UploadImageComponent
   },
   {
     path: 'login',
