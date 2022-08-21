@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <title>Furama | Service</title>
+    <link rel="shortcut icon" href="https://furamavietnam.com/wp-content/uploads/2018/07/favicon.png"
+          type="image/x-icon">
+    <link rel="icon" type="image/x-icon" href="../static/assets/favicon.ico"/>
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet"/>
+    <!-- Google fonts-->
+    <link rel="preconnect" href="https://fonts.gstatic.com"/>
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,600;1,600&amp;display=swap"
+          rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,300;0,500;0,600;0,700;1,300;1,500;1,600;1,700&amp;display=swap"
+          rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,400;1,400&amp;display=swap"
+          rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <script th:src="@{/js/service.js}"></script>
+    <style>
+        .page-item.active .page-link {
+            z-index: 3;
+            color: white !important;
+            background-color: black !important;
+            border-color: black !important;
+        }
+
+        .page-link {
+            color: black !important;
+        }
+    </style>
+</head>
+<body id="page-top">
+<div th:replace="/layout :: head">
+</div>
+<div class="container" style="margin-top: 5rem">
+    <div class="row m-2">
+        <center>
+            <h4>Service</h4>
+            <a class="text-decoration-none" href="#" data-target="#createModal" data-toggle="modal">
+                Add new service
+            </a>
+            <br>
+            <i th:if="${msg != null}" class="bi bi-check2-circle">
+                <span class="" th:text="${msg}"></span>
+            </i>
+        </center>
+    </div>
+    <div class="row">
+        <table class="table table-hover" id="serviceTable">
+            <thead class="text-white table-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Code</th>
+                <th scope="col">Name</th>
+                <th scope="col">Area</th>
+                <th scope="col">Cost</th>
+                <th scope="col">Max people</th>
+                <th scope="col">Room standard</th>
+                <th scope="col">Other convenience</th>
+                <th scope="col">Pool area</th>
+                <th scope="col">Floors</th>
+                <th scope="col">Rent type</th>
+                <th scope="col">Service type</th>
+                <th scope="col">Edit</th>
+                <th scope="col">Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="row,rowStat : ${serviceList}">
+                <td scope="row" th:text="${rowStat.count}"></td>
+                <td th:text="${row.serviceCode}"></td>
+                <td th:text="${row.serviceName}"></td>
+                <td th:text="${row.serviceArea}"></td>
+                <td th:text="${row.serviceCost}"></td>
+                <td th:text="${row.serviceMaxPeople}"></td>
+                <td th:text="${row.serviceStandardRoom}"></td>
+                <td th:text="${row.descriptionOtherConvenience}"></td>
+                <td th:text="${row.servicePoolArea}"></td>
+                <td th:text="${row.serviceNumberOfFloors}"></td>
+                <td th:text="${row.rentType.rentTypeName}"></td>
+                <td th:text="${row.serviceType.serviceTypeName}"></td>
+                <td><a class="editService text-decoration-none" th:href="${row.serviceId}"
+                       data-toggle="modal">Edit</a></td>
+                <td>
+                    <a href="#" th:attr="onclick=|info('${row.serviceId}','${row.serviceName}')|"
+                       class="text-decoration-none" data-toggle="modal"
+                       data-target="#deleteModal">Delete</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <nav>
+            <ul class="pagination pagination-sm justify-content-center">
+                <li class="page-item">
+                    <a class="page-link" th:if="${serviceList.hasPrevious()}"
+                       th:href="@{/service/(page = ${serviceList.number - 1})}">Previous</a>
+                </li>
+                <div th:each="pageNo: ${#numbers.sequence(0,serviceList.totalPages - 1)}">
+                    <li class="page-item" th:if="${serviceList.number != pageNo}">
+                        <a class="page-link" th:href="@{/service/(page = ${pageNo})}" th:text="${pageNo + 1}"></a>
+                    </li>
+                    <li class="page-item active" th:if="${serviceList.number == pageNo}">
+                        <a class="page-link" th:href="@{/service/(page = ${pageNo})}" th:text="${pageNo + 1}"> </a>
+                    </li>
+                </div>
+                <li class="page-item">
+                    <a class="page-link" th:if="${serviceList.hasNext()}"
+                       th:href="@{/service/(page = ${serviceList.number + 1})}">Next</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+<!--Modal create-->
+<form th:action="@{/service/save}" th:object="${service}" method="POST" class="needs-validation p-4">
+    <div class="modal fade bd-example-modal-lg" id="createModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createModalTitle">Create new service</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label for="serviceCode">Service Code</label>
+                            <input type="text" th:field="*{serviceCode}" class="form-control" id="serviceCode"
+                                   placeholder="DV-1234" value="" required>
+                            <p style="color: red" id="serviceCodeError"></p>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="serviceName">Service Name</label>
+                            <input type="text" th:field="*{serviceName}" class="form-control" id="serviceName"
+                                   placeholder="House" value="" required>
+                            <p style="color: red" id="serviceNameError"></p>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="serviceArea">Service Area</label>
+                            <input type="text" th:field="*{serviceArea}" class="form-control" id="serviceArea"
+                                   placeholder="50" required>
+                            <p style="color: red" id="serviceAreaError"></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label for="serviceCost">Service Cost</label>
+                            <input type="text" th:field="*{serviceCost}" class="form-control" id="serviceCost"
+                                   placeholder="50" required>
+                            <p style="color: red" id="serviceCostError"></p>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="serviceMaxPeople">Service Max People</label>
+                            <input type="text" th:field="*{serviceMaxPeople}" class="form-control" id="serviceMaxPeople"
+                                   placeholder="2" required>
+                            <p style="color: red" id="serviceMaxPeopleError"></p>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="serviceStandardRoom">Service Standard Room</label>
+                            <input type="text" th:field="*{serviceStandardRoom}" class="form-control" id="serviceStandardRoom"
+                                   placeholder="Normal">
+                            <p style="color: red" id="serviceStandardRoomError"></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label for="otherConvenience">Other Convenience</label>
+                            <input type="text" th:field="*{descriptionOtherConvenience}" class="form-control" id="otherConvenience"
+                                   placeholder="Free breakfast">
+                            <p style="color: red" id="serviceOtherConvenienceError"></p>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="servicePoolArea">Service Pool Area</label>
+                            <input type="text" th:field="*{servicePoolArea}" class="form-control" id="servicePoolArea"
+                                   placeholder="30">
+                            <p style="color: red" id="servicePoolAreaError"></p>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="numberOfFloors">Number Of Floors</label>
+                            <input type="text" th:field="*{serviceNumberOfFloors}" class="form-control" id="numberOfFloors"
+                                   placeholder="3">
+                            <p style="color: red" id="serviceNumberOfFloorsError"></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label for="rentType">Rent Type</label>
+                            <select th:field="*{rentType}" class="form-control" id="rentType">
+                                <option th:each="row: ${rentTypeList}" th:value="${row.rentTypeId}" th:text="${row.rentTypeName}">
+                            </select>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="serviceType">Service Type</label>
+                            <select th:field="*{serviceType}" class="form-control" id="serviceType">
+                                <option th:each="row: ${serviceTypeList}" th:value="${row.serviceTypeId}" th:text="${row.serviceTypeName}">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                            <label class="form-check-label" for="invalidCheck">
+                                Agree to terms and conditions
+                            </label>
+                            <div class="invalid-feedback">
+                                You must agree before submitting.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+                    <button type="button" onclick="createService()" class="btn btn-dark">Create</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<!--Modal edit-->
+<form th:action="@{/service/save}" th:object="${service}" method="POST" class="needs-validation p-4" id="formEdit">
+    <div class="modal fade bd-example-modal-lg" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalTitle">Edit service</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <input type="hidden" th:field="*{serviceId}" class="form-control" id="editServiceId" value="" required>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label for="editServiceCode">Service Code</label>
+                            <input type="text" th:field="*{serviceCode}" class="form-control" id="editServiceCode"
+                                   placeholder="DV-1234" value="" required>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="editServiceName">Service Name</label>
+                            <input type="text" th:field="*{serviceName}" class="form-control" id="editServiceName"
+                                   placeholder="House" value="" required>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="editServiceArea">Service Area</label>
+                            <input type="text" th:field="*{serviceArea}" class="form-control" id="editServiceArea"
+                                   placeholder="50" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label for="editServiceCost">Service Cost</label>
+                            <input type="text" th:field="*{serviceCost}" class="form-control" id="editServiceCost"
+                                   placeholder="50" required>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="editServiceMaxPeople">Service Max People</label>
+                            <input type="text" th:field="*{serviceMaxPeople}" class="form-control" id="editServiceMaxPeople"
+                                   placeholder="2" required>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="editServiceStandardRoom">Service Standard Room</label>
+                            <input type="text" th:field="*{serviceStandardRoom}" class="form-control" id="editServiceStandardRoom"
+                                   placeholder="Normal">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label for="editOtherConvenience">Other Convenience</label>
+                            <input type="text" th:field="*{descriptionOtherConvenience}" class="form-control" id="editOtherConvenience"
+                                   placeholder="Free breakfast">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="editServicePoolArea">Service Pool Area</label>
+                            <input type="text" th:field="*{servicePoolArea}" class="form-control" id="editServicePoolArea"
+                                   placeholder="30">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="editNumberOfFloors">Number Of Floors</label>
+                            <input type="text" th:field="*{serviceNumberOfFloors}" class="form-control" id="editNumberOfFloors"
+                                   placeholder="3">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label for="editRentType">Rent Type</label>
+                            <select th:field="*{rentType}" class="form-control" id="editRentType">
+                                <option th:each="row: ${rentTypeList}" th:value="${row.rentTypeId}" th:text="${row.rentTypeName}">
+                            </select>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="editServiceType">Service Type</label>
+                            <select th:field="*{serviceType}" class="form-control" id="editServiceType">
+                                <option th:each="row: ${serviceTypeList}" th:value="${row.serviceTypeId}" th:text="${row.serviceTypeName}">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-dark" data-dismiss="modal" id="save">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<!--Modal-->
+<form th:action="@{/service/delete}" method="get">
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Notification</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input th:type="hidden" id="id" name="serviceId">
+                    Are you sure to delete <span id="name"></span>?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-dark">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<!-- Small modal -->
+<div class="modal fade bd-example-modal-sm" id="testModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            ...
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <title>Furama | Employee</title>
+    <link rel="shortcut icon" href="https://furamavietnam.com/wp-content/uploads/2018/07/favicon.png" type="image/x-icon">
+    <link rel="icon" type="image/x-icon" href="../static/assets/favicon.ico"/>
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet"/>
+    <!-- Google fonts-->
+    <link rel="preconnect" href="https://fonts.gstatic.com"/>
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,600;1,600&amp;display=swap"
+          rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,300;0,500;0,600;0,700;1,300;1,500;1,600;1,700&amp;display=swap"
+          rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,400;1,400&amp;display=swap"
+          rel="stylesheet"/>
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body id="page-top">
+<div th:replace="/layout :: head">
+</div>
+<div class="container" style="margin-top: 8rem">
+    <div class="row">
+        <center>
+            <h4>Add new employee</h4>
+        </center>
+    </div>
+    <div class="row" style="justify-content: center">
+        <form th:object="${employee}" th:action="@{/employee/save}" method="POST" class="needs-validation p-4"
+              style="background-color: whitesmoke; border-radius: 1rem; width: 70%" novalidate>
+            <div class="form-row">
+                <div class="col-md-4 mb-3">
+                    <label for="validationCustom1">Employee Code</label>
+                    <input type="text" th:field="*{employeeCode}" class="form-control" id="validationCustom1"
+                           placeholder="NV-1234" value="" required>
+<!--                    <p style="color: red; font-size: 0.9rem" th:if="${#fields.hasErrors('firstName')}"-->
+<!--                       th:errors="*{firstName}"></p>-->
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="validationCustom2">Employee Name</label>
+                    <input type="text" th:field="*{employeeName}" class="form-control" id="validationCustom2"
+                           placeholder="Tran Van A" value="" required>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="validationCustom3">Date Of Birth</label>
+                    <input type="date" th:field="*{employeeBirthday}" class="form-control" id="validationCustom3"
+                           placeholder="" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-4 mb-3">
+                    <label for="validationCustom4">Employee ID Card</label>
+                    <input type="text" th:field="*{employeeIdCard}" class="form-control" id="validationCustom4"
+                               placeholder="1945XXXXX" required>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="validationCustom5">Employee Salary</label>
+                    <input type="text" th:field="*{employeeSalary}" class="form-control" id="validationCustom5"
+                           placeholder="XXXX" required>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="validationCustom6">Employee Phone</label>
+                    <input type="text" th:field="*{employeePhone}" class="form-control" id="validationCustom6"
+                           placeholder="(090-091-84) XXXXXXX" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-4 mb-3">
+                    <label for="validationCustom7">Employee Email</label>
+                    <input type="text" th:field="*{employeeEmail}" class="form-control" id="validationCustom7"
+                           placeholder="abc@gmail.com" required>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="validationCustom8">Employee Address</label>
+                    <input type="text" th:field="*{employeeAddress}" class="form-control" id="validationCustom8"
+                           placeholder="Address" required>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="validationCustom9">Position</label>
+                    <select th:field="*{position}" class="form-control" id="validationCustom9">
+                        <option th:each="row: ${positionList}" th:value="${row.positionId}" th:text="${row.positionName}">
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-4 mb-3">
+                    <label for="validationCustom10">Division</label>
+                    <select th:field="*{division}" class="form-control" id="validationCustom10">
+                        <option th:each="row: ${divisionList}" th:value="${row.divisionId}" th:text="${row.divisionName}">
+                    </select>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="validationCustom11">Education Degree</label>
+                    <select th:field="*{educationDegree}" class="form-control" id="validationCustom11">
+                        <option th:each="row: ${educationDegreeList}" th:value="${row.educationDegreeId}" th:text="${row.educationDegreeName}">
+                    </select>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="validationCustom12">User Name</label>
+                    <select th:field="*{user}" class="form-control" id="validationCustom12">
+                        <option th:each="row: ${userList}" th:value="${row.userId}" th:text="${row.userName}">
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                    <label class="form-check-label" for="invalidCheck">
+                        Agree to terms and conditions
+                    </label>
+                    <div class="invalid-feedback">
+                        You must agree before submitting.
+                    </div>
+                </div>
+            </div>
+            <button class="btn text-white" type="submit" style="background-color: black">Create</button>
+        </form>
+
+        <script>
+            // Example starter JavaScript for disabling form submissions if there are invalid fields
+            (function () {
+                'use strict';
+                window.addEventListener('load', function () {
+                    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                    var forms = document.getElementsByClassName('needs-validation');
+                    // Loop over them and prevent submission
+                    var validation = Array.prototype.filter.call(forms, function (form) {
+                        form.addEventListener('submit', function (event) {
+                            if (form.checkValidity() === false) {
+                                event.preventDefault();
+                                event.stopPropagation();
+                            }
+                            form.classList.add('was-validated');
+                        }, false);
+                    });
+                }, false);
+            })();
+        </script>
+    </div>
+</div>
+
+
+<!--<div th:replace="/layout :: foot"></div>-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<script th:src="@{/js/scripts.js}"></script>
+<script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+</html>
